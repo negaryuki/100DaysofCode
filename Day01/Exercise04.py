@@ -7,4 +7,4 @@ print("Hello" + " " + input("What is your Name?"))
 
 # Exercise 03:
 
-print(len(input("what is your name")))
+print(len(input("what is your name ")))
