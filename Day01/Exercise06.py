@@ -4,4 +4,4 @@ pet=(input("What's the name of your first pet?\n"))
 
 band_name = city + "" + pet
 
-print("your Band Name could be " + band_name)
+print("your Band Name could be\n " + band_name)
