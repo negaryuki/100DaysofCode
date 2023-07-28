@@ -14,3 +14,24 @@ print(123_345_567)
 # 4. Boolean -> True / False
 
 # In order to check the type of our data we can use the function => type()
+
+# whenever you divide a number the result will be a "float"
+# In order to "power" numbers we use => **
+
+a = print(2**3)
+
+#Priorities in mathematics
+# PEMDAS
+
+# Parentheses ()
+# Exponents **
+# Multiplication *
+# Division /
+# Addition +
+# Subtraction -
+
+print(3*(3+3)/3-3)
+
+
+
+
