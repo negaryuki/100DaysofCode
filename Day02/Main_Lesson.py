@@ -51,5 +51,12 @@ result **= 3
 
 print(result)
 
+# f-string : changes all type to strings => f" type here {a} , again type {b}"
+
+score=0
+height=1.8
+isWinning= True
+
+print(f"Your score is{score},your height is {height}, you are winning is {isWinning}")
 
 
