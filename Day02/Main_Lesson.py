@@ -12,3 +12,5 @@ print(123_345_567)
 # 3. Floats -> Numbers with decimals / 123.34
 
 # 4. Boolean -> True / False
+
+# In order to check the type of our data we can use the function => type()
