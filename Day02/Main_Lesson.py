@@ -32,6 +32,24 @@ a = print(2**3)
 
 print(3*(3+3)/3-3)
 
+#Rounding numbers => print(8//3) will result in an integer rather than a float
+# using round(number, number of decimals) will result in a round number
+
+print(8/3)
+
+print(8//3)
+
+print(round(8/3))
+print(round(8/3,2))
+
+# continue calculating: we can simplify the code by writing a/= 2
+
+result=4/2
+result /=2
+
+result **= 3
+
+print(result)
 
 
 

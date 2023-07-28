@@ -14,5 +14,7 @@ new_weight = float(weight)
 
 bmi = int(new_weight / new_height ** 2)
 
+#for short  -->  bmi = float(weight) / float(height) **2
+
 new_bmi = str(bmi)
 print("Your BMI is " + new_bmi)
