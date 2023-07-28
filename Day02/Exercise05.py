@@ -14,4 +14,7 @@ tip = total_bill_float * percentage_float / 100
 each_tip = tip/people_int
 each_share = round(share_without_tip + each_tip, 2)
 
+# in order to force the program to write the second decimal, although it's a 0
+each_share = "{:.2f}".format(each_share)
+
 print(f'Each person should pay {each_share}')
