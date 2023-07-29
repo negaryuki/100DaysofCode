@@ -8,3 +8,5 @@ if height == 120:
 else:
     print("You Can't ride the roller coaster")
 
+# Modulo operator !! : 7 % 2 = 2 + 2 + 2 + (1) ==> 7 % 2 = 1
+
