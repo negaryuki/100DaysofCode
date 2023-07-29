@@ -38,3 +38,26 @@ if height >= 120:
         print("please Pay 12$")
 else:
     print("you can not ride the roller coaster")
+
+# Multiple if
+
+want_photo = input("Do you want a Photo? Y or N?")
+Bill = 0
+
+if height >= 120:
+    print("You can ride the roller coaster")
+    if age <= 12:
+        Bill=5
+        print("Children tickets are 5$")
+    elif 12 > age <= 18:
+        Bill =7
+        print("Youth Tickets are 7$")
+    else:
+        print("Adult tickets are 12$")
+        Bill = 12
+        if want_photo == "Y":
+            Bill += 3
+        print(f'Your total Bill is {Bill}')
+
+else:
+    print("you can not ride the roller coaster")
