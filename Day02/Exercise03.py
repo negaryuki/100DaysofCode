@@ -7,7 +7,7 @@ weight = input("enter your weight in Kg:\n")
 
 #write here:
 
-#BMI = weight (kg) / weight (m**2)
+#BMI = weight (kg) / height (m**2)
 
 new_height = float(height)
 new_weight = float(weight)
