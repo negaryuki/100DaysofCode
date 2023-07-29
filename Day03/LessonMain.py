@@ -61,3 +61,17 @@ if height >= 120:
 
 else:
     print("you can not ride the roller coaster")
+
+# Combining different conditions
+
+# Lower function
+
+print("Apple".lower())
+
+# Count Fuction
+
+print("Angela".count("a"))
+
+lower_case = "Apple".lower()
+
+print(lower_case.count("a"))
