@@ -74,3 +74,5 @@ elif selection == 2 and computer == 2:
         print(Paper)
         print(f'Computer Chooses {Paper}')
         print("It's a Draw!")
+else:
+    print("you added a wrong number")
