@@ -2,8 +2,6 @@
 
 import random
 
-
-
 random = random.randint(0, 1)
 
 print(random)
