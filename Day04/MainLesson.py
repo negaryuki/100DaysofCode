@@ -38,3 +38,9 @@ print(fruits)
 fruits.extend(["melon","watermelon"])
 
 print(fruits)
+# stg.split divides a string into a list with different items
+
+e = " Hello, and, Goodbye"
+e.split(", ")
+
+print(e)
