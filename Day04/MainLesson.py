@@ -44,3 +44,8 @@ e = " Hello, and, Goodbye"
 e.split(", ")
 
 print(e)
+
+#Nested lists
+
+nested_lists = [states_of_america, fruits]
+print(nested_lists)
