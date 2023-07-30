@@ -17,7 +17,7 @@ print(length)
 
 import random
 
-random_name = random.randint(0,length)
+random_name = random.randint(0,length-1)
 
 payer = (names[random_name])
 
