@@ -9,3 +9,14 @@ for fruit in fruits:
     print(fruit + " Pie")
     print(fruits)
 
+# range operator for i in range (a,b , step)
+
+for i in range(1, 11,3):
+    print(i)
+
+
+total = 0
+
+for e in range(1,101):
+    total += e
+print(total)
