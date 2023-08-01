@@ -19,3 +19,8 @@ def new_function():
 print("world")
 
 new_function()
+
+#------------------------------
+# while loop => while something is true /
+
+# while not or while !=
