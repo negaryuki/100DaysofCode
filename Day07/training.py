@@ -4,11 +4,13 @@ word_list = ["ardvark", "baboom", "camel"]
 
 chosen_word = random.choice(word_list)
 
+word_length = len(chosen_word)
+
 print(f'The Original word is {chosen_word}')
 
 display = []
 
-for letter in chosen_word:
+for letter in range(word_length):
     display += "_"
 
 print(display)
