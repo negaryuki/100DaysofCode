@@ -17,8 +17,11 @@ print(display)
 
 guess = input("Guess a letter").lower()
 
-for letter in chosen_word:
-    if guess == letter:
-        print("right")
-    else:
-        print("wrong")
+for position in range(word_length):
+    letter = chosen_word[position]
+
+    if letter == guess:
+        display[position] = letter
+
+
+print(display)
