@@ -17,3 +17,11 @@ def greet_with_name(name):
 greet_with_name("Emilia")
 
 greet_with_name("Goerge")
+
+# Functions with more than one input:
+
+def greet_with (name, location):
+    print(f'Hello, My name is {name} and I am from {location}')
+
+
+greet_with("Angel" , "Las vegas")
