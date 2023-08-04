@@ -10,18 +10,23 @@ print(f'The Original word is {chosen_word}')
 
 display = []
 
+end_of_game = False
+
 for letter in range(word_length):
     display += "_"
 
 print(display)
 
-guess = input("Guess a letter").lower()
+while not end_of_game:
+    guess = input("Guess a letter").lower()
 
-for position in range(word_length):
-    letter = chosen_word[position]
+    for position in range(word_length):
+        letter = chosen_word[position]
 
-    if letter == guess:
-        display[position] = letter
+        if letter == guess:
+            display[position] = letter
 
+        if not guess in chosen_word:
+            end_of_game = True
 
 print(display)
