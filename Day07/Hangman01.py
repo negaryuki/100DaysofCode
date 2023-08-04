@@ -1,7 +1,7 @@
 # step 1
 import random
 
-word_list = ["Advocate", "baboom", "camel"]
+word_list = ["ardvark", "baboom", "camel"]
 
 chosen_word = random.choice(word_list)
 

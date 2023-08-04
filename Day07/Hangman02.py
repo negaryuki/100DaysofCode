@@ -3,7 +3,7 @@
 
 import random
 
-word_list = ["Advocate", "baboom", "camel"]
+word_list = ["ardvark", "baboom", "camel"]
 
 chosen_word = random.choice(word_list)
 print(f'Psst the chosen word is: {chosen_word}')
