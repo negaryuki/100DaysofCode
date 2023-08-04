@@ -23,5 +23,9 @@ greet_with_name("Goerge")
 def greet_with (name, location):
     print(f'Hello, My name is {name} and I am from {location}')
 
+# Keyword Arguments:
+
+def greet_key_arguments(a=1,b=2):
+    print(f'Hello, My name is {a} and I am from {b}')
 
 greet_with("Angel" , "Las vegas")
