@@ -29,4 +29,6 @@ while not end_of_game:
         if not guess in chosen_word:
             end_of_game = True
 
+        if not "_" in display:
+            end_of_game = True
 print(display)
