@@ -20,7 +20,18 @@ def encrypt (plain_text,shift_amount):
         cipher_text += new_letter
     print(f'Your encrypted text is: {cipher_text}')
 
-encrypt(text,shift)
+
+
+
+def decrypt(cypher_text,shift_amount):
+    plain_text = ""
+    for letter in cypher_text:
+        position = alphabet.index(letter)
+        new_position = position - shift_amount
+        plain_text += alphabet[new_position]
+    print(f'Your decoded text is: {plain_text}')
+
+decrypt(text,shift)
 
 
 # To DO-2: inside 'encrypt' function, shift each letter of the 'text' forward in the alphabet by
@@ -34,14 +45,10 @@ encrypt(text,shift)
 # To Do-3: create a function called 'decrypt' that takes the 'text' and shift as input.
 # To Do -4: inside 'decrypt' function, shift each letter of the 'text' backward in the alphabet by
 # the shift amount and print the encrypted text
-
-def decrypt(plain_text,shift_amount):
-    cipher_text = ""
-    for letter in plain_text:
-        position = alphabet.index(letter)
-        new_position = position - shift_amount
-        cipher_text += alphabet[new_position]
-    print(f'Your decrypted text is: {cipher_text}')
+# To Do-5: check if the user wanted to encrypt or decrypt the message by checking the 'direction' variable.
 
 
-decrypt(text,shift)
+if direction == "encode":
+    encrypt(text,shift)
+elif direction == "decode":
+    decrypt(text,shift)
