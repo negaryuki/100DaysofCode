@@ -18,7 +18,7 @@ def encrypt (plain_text,shift_amount):
         new_position = position + shift_amount
         new_letter = alphabet[new_position]
         cipher_text += new_letter
-    print(f'Your encrypted text is {cipher_text}')
+    print(f'Your encrypted text is: {cipher_text}')
 
 encrypt(text,shift)
 
