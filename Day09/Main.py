@@ -37,3 +37,31 @@ for thing in programming_dictionary:
     print(programming_dictionary[thing])
 
 
+# Nesting lists in Dictionaries:
+capitals = {
+    "France": "Paris",
+    "Germany": "Berlin"
+}
+travel_log = {
+    "France": ["Paris","lille","Dijon"],
+    "Germany": "Berlin"
+}
+
+# Nesting Dictionary in Dictionary
+
+traveling = {
+    "France": {"cities": "Paris" , "times": 3},
+    "Germany": {"cities": "Berlin" , "times": 3},
+
+}
+
+# Nesting Dictionary in lists
+
+traveling_log = [
+    {"Country": "France",
+     "cities": ["Paris" , "Dijon"],
+     "times": 3},
+    {"Country": "Germany",
+     "cities": ['Berlin'],
+    "times": 3}
+]
