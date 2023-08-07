@@ -65,3 +65,4 @@ traveling_log = [
      "cities": ['Berlin'],
     "times": 3}
 ]
+
