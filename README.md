@@ -1,7 +1,4 @@
-# 100DaysofCode
-
-
-# Python Bootcamp by Angela Yu - Road to Python Mastery
+# 100DaysofCode - Python Bootcamp by Angela Yu - Road to Python Mastery
 
 ## Overview
 
