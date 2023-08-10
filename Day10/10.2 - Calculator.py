@@ -1,4 +1,6 @@
 # Calculator Project
+
+
 from art import logo
 
 # Add:
@@ -29,36 +31,35 @@ operations = {
 "/" : divide
             }
 
-num1 = int(input("what's the first number"))
-num2 = int(input("what's the second number"))
+def calculator():
+    num1 = float(input("what's the first number"))
 
+    for symbol in operations:
+        print(symbol)
 
-for symbol in operations:
-    print(symbol)
+    continue_cal = True
 
-operation_symbol = input(" Pick an Operation symbol from the line above")
-    
-calculation_function = operations[operation_symbol]
-answer = calculation_function(num1,num2)
-    
-print(f"{num1} {operation_symbol} {num2} = {answer}")
+    while continue_cal:
 
-continue_cal = True
-
-while continue_cal:
-    question = input("Do you want to continue? 'Yes' or 'No'").lower()
-    
-    if question == "yes":
-        num3 = int(input("Pick another number"))
-        operation_symbol = input(" Pick another Operation symbol")
+        operation_symbol = input(" Pick an Operation symbol from the line above")    
+        num2 = float(input("what is the next number?"))
         calculation_function = operations[operation_symbol]
-        second_answer = calculation_function(answer,num3)
-        print(f"{answer} {operation_symbol} {num3} = {second_answer}")
-    else:
-        continue_cal = False
-        print("The program has finished")
+        answer = calculation_function(num1,num2)
+
+        print(f"{num1} {operation_symbol} {num2} = {answer}")
 
 
+        question = input("Do you want to continue? 'Yes' or 'No'").lower()
+
+        if question == "yes":
+            num1 = answer 
+
+        else:
+            continue_cal = False
+            print("The program has finished")
+            calculator()
+            
+calculator()
   
 # we could have also written it like this:
  
@@ -73,6 +74,3 @@ while continue_cal:
         
 #     elif operation_symbol == "/":
 #         answer = divide(num1,num2)
-
-        
-    print(f"{num1} {operation_symbol} {num2} = {answer}")
