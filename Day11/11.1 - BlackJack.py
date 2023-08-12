@@ -1,7 +1,7 @@
 # Ok Lets try writing a blackjack game on my own.
 
 import random
-
+from art import logo
 
 def deal_cards():
     cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
@@ -17,7 +17,7 @@ def calculate_score(cards):
         cards.remove(11)
         cards.append(1)
 
-        return score
+    return score
 
 
 def compare(user_score, pc_score):
@@ -41,6 +41,8 @@ def compare(user_score, pc_score):
 
 
 def game_start():
+
+    print(logo)
     user_deck = []
     pc_deck = []
     is_game_over = False
@@ -48,13 +50,10 @@ def game_start():
     for i in range(2):
         user_deck.append(deal_cards())
         pc_deck.append(deal_cards())
-        return user_deck, pc_deck
 
     while not is_game_over:
         user_score = calculate_score(user_deck)
         pc_score = calculate_score(user_deck)
-
-        compare(user_score, pc_score)
 
         print(f"   Your cards: {user_deck}, current score: {user_score}")
         print(f"   Computer's first card: {pc_deck[0]}")
@@ -67,10 +66,10 @@ def game_start():
 
             if user_should_deal == "y":
                 user_deck.append(deal_cards())
-            if user_score < 17:
+            elif user_score < 17:
                 print("Your cards are less than 17. You have to draw a card")
                 user_deck.append(deal_cards())
-            if user_should_deal == "n":
+            else:
                 is_game_over = True
 
         while pc_score < 17 and pc_score != 0:
@@ -81,5 +80,6 @@ def game_start():
         print(f"   Computer's final hand: {pc_deck}, final score: {pc_score}")
         print(compare(user_score, pc_score))
 
-while input("Do you want to play a game of Blackjack? Type 'y' or 'n': ").lower() == "y":
+
+while input("Do you want to play a game of Blackjack? Type 'y' or 'n': ") == "y":
     game_start()
