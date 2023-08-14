@@ -57,7 +57,7 @@ def game_fundamental():
 
         if attempt == 0:
             continue_guess = False
-            print("you are out of tries. Game over")
+            print(f"you are out of tries. the asnwer was {number} Game over")
 
 
 if input("Do you wanna guess the randomized number? 'y' or 'n'").lower() =='y':
