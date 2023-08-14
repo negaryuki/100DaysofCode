@@ -38,3 +38,25 @@ dice_num = randint(0,5)
 print(dice_imgs[dice_num])
 
 #-------------------------------------------------------------------------------------------
+#Play Computer
+
+#year = int(input("what is your year of Birth?"))
+
+#if year > 1980 and year < 1994:
+#    print("you are a millenial.")
+#elif year >= 1994:
+#    print(" you are Gen Z")
+    
+    
+    
+
+
+
+year = int(input("what is your year of Birth?"))
+
+if year > 1980 and year < 1994:
+    print("you are a millenial.")
+elif year >= 1994:
+    print(" you are Gen Z")
+    
+#-------------------------------------------------------------------------------------------
