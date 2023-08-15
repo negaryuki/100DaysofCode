@@ -23,20 +23,30 @@ def compare_followers():
 
     print(f" Character B : {b_character['name']} , {b_character['description']} from {b_character['country']}")
 
-    guess = input(" Who has more Followers? 'a' or 'b' ")
+    
+    game_continue= True
+    
+    while game_continue:
+        guess = input(" Who has more Followers? 'a' or 'b' ")
+        
+        if a_followers > b_followers and guess == "a":
+            b_character = a_character
+            return('You are right. Next:')
+            
+         
+        elif a_followers > b_followers and guess == "b":
+             return("wrong. You loose")
+             game_continue = False
+    
+        elif a_followers < b_followers and guess == "b":
+            b_character = a_character
+            return('You are right. Next:')
+         
+        elif a_followers < b_followers and guess == "a":
+             return("wrong. You loose")
+             game_continue = False
     
     
-    if a_followers > b_followers and guess == "a":
-        return('You are right. Next:')
-     
-    elif a_followers > b_followers and guess == "b":
-         return("wrong. You loose")
-
-    elif a_followers < b_followers and guess == "b":
-        return('You are right. Next:')
-     
-    elif a_followers < b_followers and guess == "a":
-         return("wrong. You loose")
 
 
 print(compare_followers())
