@@ -1,8 +1,11 @@
-# start by creating random_character() function. 
-
 import random
-
+import os
 from game_data import data
+from art import logo
+
+
+def clear_console():
+    os.system('clear' if os.name == 'posix' else 'cls')
 
 
 def random_character():
@@ -10,43 +13,65 @@ def random_character():
 
     return(character)        
         
-    
-def compare_followers():
-    
-    a_character = random_character() 
-    b_character = random_character()
-    
-    a_followers = a_character['follower_count']
-    b_followers = b_character['follower_count']
-    
-    print(f" Character A : {a_character['name']} , {a_character['description']} from {a_character['country']}")
-
-    print(f" Character B : {b_character['name']} , {b_character['description']} from {b_character['country']}")
-
-    
-    game_continue= True
-    
-    while game_continue:
-        guess = input(" Who has more Followers? 'a' or 'b' ")
         
-        if a_followers > b_followers and guess == "a":
-            b_character = a_character
-            return('You are right. Next:')
+        
+def return_celebrity_info(data_dic):
+    
+    return f"{data_dic['name']}, a {data_dic ['description']} from {data_dic['country']}"
+
+
+
+
+def decide_winner(A_followers , B_followers):
+    
+    A_followers = A_followers['follower_count']
+    B_followers = B_followers['follower_count']
+    
+    if A_followers > B_followers:
+        return 'a'
+    else:
+        return 'b'
+        
+        
+def game_setup(A_character , B_character):
+
+    print(logo)
+    print(f'A Character is : {return_celebrity_info(A_character)}')
+    print("vs")
+    print(f'B character is : {return_celebrity_info(B_character)}')
+    
+    
+    
+game_over = False
+game_score = 0
+
+
+A_character = random_character()
+B_character = random_character()
+
+if A_character == B_character:
+    B_character = random_character()
+    
+      
+while not game_over:
+
+    clear_console()
+    game_setup(A_character,B_character)
+    guess = input(" Who has more Followers? 'a' or 'b' ").lower()
+    correct_answer = decide_winner(A_character, B_character)
+        
+    if guess == correct_answer:
+        game_score += 1
+        print (f"You are right. Your score: {game_score} Next is:")
+        
+        if correct_answer == 'b':
             
-         
-        elif a_followers > b_followers and guess == "b":
-             return("wrong. You loose")
-             game_continue = False
-    
-        elif a_followers < b_followers and guess == "b":
-            b_character = a_character
-            return('You are right. Next:')
-         
-        elif a_followers < b_followers and guess == "a":
-             return("wrong. You loose")
-             game_continue = False
-    
-    
-
-
-print(compare_followers())
+            A_character = B_character
+            B_character =random_character()
+        
+        else:
+            B_character = random_character()
+                    
+    else:
+        game_over = True
+        print (f"You are wrong. Your final score: {game_score}")
