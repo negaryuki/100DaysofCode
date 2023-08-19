@@ -4,12 +4,31 @@
 # b. The prompt should show every time action has completed, e.g. once the drink is
 # dispensed. The prompt should show again to serve the next customer.
 # ---------------------------------------------------------------------------------------
+from data import MENU, resources
 
 espresso_price = float(1.5)
 latte_price = float(2.5)
-cappuccino_price= float(3.0)
+cappuccino_price = float(3.0)
 drink_choice = input('Welcome to the Moonbucks Coffe Machine\n '
                      '“What would you like? (espresso/latte/cappuccino):').lower()
+
+
+def resource_checker():
+    """ this function checks whether there are enough resources or not"""
+
+    if drink_choice == 'espresso':
+        resource_used = MENU("espresso")
+        water = resources("water") - resource_used("water")
+        milk = resources("milk") - resource_used("milk")
+        coffee = resources("coffee") - resource_used("coffee")
+        return water, milk, coffee
+
+
+def print_report():
+    if drink_choice == "report":
+        resource_checker()
+        print(resources)
+
 
 def order_drink():
     """ this function asks the user what drink they want"""
@@ -20,10 +39,11 @@ def order_drink():
         return latte_price
     elif drink_choice == 'cappuccino':
         return cappuccino_price
+    elif drink_choice == 'report':
+        return print_report()
 
 
 def insert_coin():
-
     quarters = float(input("How many quarters?")) * 0.25
     dimes = float(input("How many dimes?")) * 0.1
     nickles = float(input("How many nickles?")) * 0.05
@@ -35,19 +55,10 @@ def insert_coin():
         print(f"Here is your {drink_choice}. Enjoy!”")
 
     elif total_coins > order_drink():
-        refund = round((total_coins - order_drink()), 2)
-
+        change = round((total_coins - order_drink()), 2)
+        print(f'Here is your change: {change}$.')
     elif total_coins < order_drink():
         print("Sorry that's not enough money. Money refunded.")
 
 
-
-def espresso ():
-
-    if order_drink() == "espresso":
-        price = float(1.5)
-
-
-
-
-insert_coin()
+resource_checker()
