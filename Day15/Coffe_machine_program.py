@@ -1,49 +1,22 @@
-# 1. Prompt user by asking “What would you like? (espresso/latte/cappuccino):”
-
-# a. Check the user’s input to decide what to do next.
-# b. The prompt should show every time action has completed, e.g. once the drink is
-# dispensed. The prompt should show again to serve the next customer.
-# ---------------------------------------------------------------------------------------
 from data import MENU, resources
+                                          
+espresso_resources = MENU["espresso"]["ingredients"]
+latte_resources = MENU["latte"]["ingredients"]
+cappuccino_resources = MENU["cappuccino"]["ingredients"]
 
-espresso_price = float(1.5)
-latte_price = float(2.5)
-cappuccino_price = float(3.0)
-drink_choice = input('Welcome to the Moonbucks Coffe Machine\n '
-                     '“What would you like? (espresso/latte/cappuccino):').lower()
-
-
-def resource_checker():
-    """ this function checks whether there are enough resources or not"""
-
-    if drink_choice == 'espresso':
-        resource_used = MENU("espresso")
-        water = resources("water") - resource_used("water")
-        milk = resources("milk") - resource_used("milk")
-        coffee = resources("coffee") - resource_used("coffee")
-        return water, milk, coffee
+profit = 0
+is_on = True
 
 
-def print_report():
-    if drink_choice == "report":
-        resource_checker()
-        print(resources)
-
-
-def order_drink():
-    """ this function asks the user what drink they want"""
-
-    if drink_choice == 'espresso':
-        return espresso_price
-    elif drink_choice == 'latte':
-        return latte_price
-    elif drink_choice == 'cappuccino':
-        return cappuccino_price
-    elif drink_choice == 'report':
-        return print_report()
-
-
-def insert_coin():
+def resource_checker(order_ingredients):
+	
+	for i in order_ingredients:
+		if order_ingredients[i] >= resources[i]:
+			print("insufficient resources")
+			return False
+	return True	
+	
+def insert_coin(order_drink):
     quarters = float(input("How many quarters?")) * 0.25
     dimes = float(input("How many dimes?")) * 0.1
     nickles = float(input("How many nickles?")) * 0.05
@@ -51,14 +24,40 @@ def insert_coin():
 
     total_coins = quarters + dimes + nickles + pennies
 
-    if total_coins == order_drink():
-        print(f"Here is your {drink_choice}. Enjoy!”")
+    if total_coins == order_drink["cost"]:
+        print(f"Here is your {order_drink}. Enjoy!")
+        global profit
+        profit += order_drink["cost"]
+        return True
 
-    elif total_coins > order_drink():
-        change = round((total_coins - order_drink()), 2)
+    elif total_coins > order_drink["cost"]:
+        change = round((total_coins - order_drink["cost"]), 2)
+        profit += order_drink["cost"]
         print(f'Here is your change: {change}$.')
-    elif total_coins < order_drink():
-        print("Sorry that's not enough money. Money refunded.")
+        return True
+    elif total_coins < order_drink["cost"]:
+        print("Sorry that's not enough money. Money refunded.")	
+        return False
+	
 
-
-resource_checker()
+while is_on:
+	
+	choice = input('Welcome to the Moonbucks Coffe Machine\n '
+                     '“What would you like? (espresso/latte/cappuccino):').lower()
+                     
+	if choice == "off":
+		is_on =False
+	
+	elif choice =='report':
+		print(f'Water: {resources["water"]}')
+		print(f'Milk: {resources["milk"]}')
+		print(f'Coffee: {resources["coffee"]}')
+		print(f'Money: {profit}')
+		
+	else:
+		drink = MENU[choice]
+		if resource_checker(drink['ingredients']) == True:
+			if insert_coin(drink):
+				print ("here you are")
+	
+	
