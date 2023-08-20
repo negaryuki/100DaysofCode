@@ -1,8 +1,4 @@
 from data import MENU, resources
-                                          
-espresso_resources = MENU["espresso"]["ingredients"]
-latte_resources = MENU["latte"]["ingredients"]
-cappuccino_resources = MENU["cappuccino"]["ingredients"]
 
 profit = 0
 is_on = True
@@ -25,20 +21,22 @@ def insert_coin(order_drink):
     total_coins = quarters + dimes + nickles + pennies
 
     if total_coins == order_drink["cost"]:
-        print(f"Here is your {order_drink}. Enjoy!")
         global profit
         profit += order_drink["cost"]
+        print(f"Here is your {choice}. Enjoy!")
         return True
 
     elif total_coins > order_drink["cost"]:
         change = round((total_coins - order_drink["cost"]), 2)
         profit += order_drink["cost"]
         print(f'Here is your change: {change}$.')
+        print(f"Here is your {choice}. Enjoy!")
         return True
     elif total_coins < order_drink["cost"]:
         print("Sorry that's not enough money. Money refunded.")	
         return False
-	
+
+
 
 while is_on:
 	
@@ -58,6 +56,9 @@ while is_on:
 		drink = MENU[choice]
 		if resource_checker(drink['ingredients']) == True:
 			if insert_coin(drink):
-				print ("here you are")
+				print("see you next time")
+				for item in drink['ingredients']:
+					resources[item] -= drink["ingredients"][item]		
+		
 	
 	
