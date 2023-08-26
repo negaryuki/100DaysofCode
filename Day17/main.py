@@ -5,8 +5,8 @@ from quiz_brain import QuizBrain
 question_bank = []
 
 for question in question_data:
-    new_text = question["text"]
-    new_answer = question["answer"]
+    new_text = question["question"]
+    new_answer = question["correct_answer"]
     new_question = Question(new_text,new_answer)
     question_bank.append(new_question)
 
@@ -15,4 +15,6 @@ for question in question_data:
 # check if we are at the end of the quiz
 
 quiz = QuizBrain(question_bank)
-quiz.next_question()
+
+while quiz.still_has_question():
+    quiz.next_question()
