@@ -9,7 +9,5 @@ timmy_the_turtle.right(90)
 
 
 
-
-
 screen = Screen()
 screen.exitonclick()
