@@ -2,7 +2,7 @@ import turtle
 from turtle import Turtle, Screen
 import colorgram
 
-colors = colorgram.extract('images.jpeg', 6)
+colors = colorgram.extract('images.jpeg', 20)
 rgb = []
 
 
