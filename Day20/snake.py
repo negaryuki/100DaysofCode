@@ -4,7 +4,11 @@ from turtle import Turtle
 
 # These are constants and are reachable throughout the class
 SEGMENT_DISTANCE = [(0, 0), (-20, 0), (-40, 0)]  # create a tuple to define snake segments location
-MOVE_DISTANCE = 20  # we create constants so that in case we want to make chages in the games option,
+MOVE_DISTANCE = 20  # we create constants so that in case we want to make changes in the games option
+UP = 90
+DOWN = 270
+LEFT = 180
+RIGHT = 0
 
 
 # we merely access it through the start of the code rather than the whole code body
@@ -34,17 +38,21 @@ class Snake:
 
     # Define methods to control the snake with arrow keys
     def up(self):
-        self.head.setheading(90) # Set the snake's heading to 90 degrees (upward)
-        self.move()
+        if self.head.heading() != DOWN:
+            self.head.setheading(UP) # Set the snake's heading to 90 degrees (upward)
+            self.move()
 
     def down(self):
-        self.head.setheading(270) # Set the snake's heading to 270 degrees (downward)
-        self.move()
+        if self.head.heading() != UP:
+            self.head.setheading(DOWN) # Set the snake's heading to 270 degrees (downward)
+            self.move()
 
     def left(self):
-        self.head.setheading(180)  # Set the snake's heading to 180 degrees (leftward)
-        self.move()
+        if self.head.heading() != RIGHT:
+            self.head.setheading(LEFT)  # Set the snake's heading to 180 degrees (leftward)
+            self.move()
 
     def right(self):
-        self.head.setheading(0) # Set the snake's heading to 0 degrees (rightward)
-        self.move()
+        if self.head.heading() != LEFT:
+            self.head.setheading(RIGHT) # Set the snake's heading to 0 degrees (rightward)
+            self.move()
