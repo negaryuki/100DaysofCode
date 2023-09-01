@@ -24,7 +24,7 @@ for position in segment_distance:
 game_on = True
 
 while game_on:
-    screen.update()
+    screen.update()  # update screen in order to show snake
     time.sleep(0.1)
 
     for seg in range(len(snake) - 1, 0, -1):
