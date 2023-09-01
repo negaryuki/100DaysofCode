@@ -14,7 +14,8 @@ class Snake:
     def __init__(self):
         self.snake = []  # create an empty list to hold the segments later on
         self.create_snake()  # method to create a snake
-        self.move()
+        self.head = self.snake[0]
+
 
     def create_snake(self):
         for position in SEGMENT_DISTANCE:
@@ -29,22 +30,21 @@ class Snake:
             new_x = self.snake[seg - 1].xcor()
             new_y = self.snake[seg - 1].ycor()
             self.snake[seg].goto(new_x, new_y)
-        self.snake[0].forward(MOVE_DISTANCE)
+        self.head.forward(MOVE_DISTANCE)
 
     # Define methods to control the snake with arrow keys
     def up(self):
-        self.snake[0].setheading(90) # Set the snake's heading to 90 degrees (upward)
+        self.head.setheading(90) # Set the snake's heading to 90 degrees (upward)
         self.move()
 
     def down(self):
-        self.snake[0].setheading(270) # Set the snake's heading to 270 degrees (downward)
-        self.move()
+        self.head.setheading(270) # Set the snake's heading to 270 degrees (downward)
         self.move()
 
     def left(self):
-        self.snake[0].setheading(180)  # Set the snake's heading to 180 degrees (leftward)
+        self.head.setheading(180)  # Set the snake's heading to 180 degrees (leftward)
         self.move()
 
     def right(self):
-        self.snake[0].setheading(0) # Set the snake's heading to 0 degrees (rightward)
+        self.head.setheading(0) # Set the snake's heading to 0 degrees (rightward)
         self.move()
