@@ -15,7 +15,7 @@ y_position = [-70,-40, -10,20 ,50, 80]
 
 all_turtles = []
 	
-for i in range(0,6)
+for i in range(0,6):
 	new_turtle = Turtle(shape="turtle")
 	new_turtle.penup()
 	new_turtle.color(colors[i])
@@ -39,8 +39,8 @@ while race_on:
 			else:
 				print(f'You loose! the {winner} turtle is the winner')
 										
-	rand_distance = random.randint(0,10)
-	i.forward(rand_distancea)
+		rand_distance = random.randint(0,10)
+		i.forward(rand_distance)
 	
 
 		
