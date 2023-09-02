@@ -20,14 +20,19 @@ class Snake:
         self.create_snake()  # method to create a snake
         self.head = self.snake[0]
 
-
     def create_snake(self):
         for position in SEGMENT_DISTANCE:
-            segment = Turtle("square")
-            segment.color("white")
-            segment.penup()
-            segment.goto(position)
-            self.snake.append(segment)
+            self.add_segment(position)
+
+    def add_segment(self, position):
+        segment = Turtle("square")
+        segment.color("white")
+        segment.penup()
+        segment.goto(position)  # in the for loop before
+        self.snake.append(segment)
+
+    def extend(self):
+        self.add_segment(self.snake[-1].position())  # position is a method of the Turtle class
 
     def move(self):
         for seg in range(len(self.snake) - 1, 0, -1):
@@ -39,12 +44,12 @@ class Snake:
     # Define methods to control the snake with arrow keys
     def up(self):
         if self.head.heading() != DOWN:
-            self.head.setheading(UP) # Set the snake's heading to 90 degrees (upward)
+            self.head.setheading(UP)  # Set the snake's heading to 90 degrees (upward)
             self.move()
 
     def down(self):
         if self.head.heading() != UP:
-            self.head.setheading(DOWN) # Set the snake's heading to 270 degrees (downward)
+            self.head.setheading(DOWN)  # Set the snake's heading to 270 degrees (downward)
             self.move()
 
     def left(self):
@@ -54,5 +59,5 @@ class Snake:
 
     def right(self):
         if self.head.heading() != LEFT:
-            self.head.setheading(RIGHT) # Set the snake's heading to 0 degrees (rightward)
+            self.head.setheading(RIGHT)  # Set the snake's heading to 0 degrees (rightward)
             self.move()
