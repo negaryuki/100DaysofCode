@@ -34,7 +34,7 @@ screen.onkey(_paddle.down, "s")
 
 while game_on:
 	
-	time.sleep(0.1)
+	time.sleep(ball.move_speed) # defines speed of game
 	screen.update() 
 	ball.movement()
 	
@@ -50,6 +50,7 @@ while game_on:
 	
   # Point for left:
   	if ball.xcor() > 380:
+  		
   		ball.reset_position()
   		scoreboard.l_point()
   
