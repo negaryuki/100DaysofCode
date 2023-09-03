@@ -6,22 +6,24 @@ from turtle import Turtle
 # x_pos = 350
 # y_pos = 0
 
-class Paddle();
-    def __init__(self): 
-        paddle = Turtle()
-        paddle.shape = ("square")
-        paddle.shapesize(strech_wid = 5,strech_len= 1). # turtle size start at 20 x 20 
-        # in order to 100 --> 20x(5)
-        paddle.color("white")
-        paddle.penup()
-        paddle.goto(350,0)
+
+
+class Paddle(Turtle):
+		def __init__(self,position):
+			super().__init__()
+        self.shape = ("square")
+        self.shapesize(strech_wid = 5,strech_len= 1). # turtle size start at 20 x 20 
+       # in order to 100 --> 20x(5)
+        self.color("white")
+        self.penup()
+        self.goto(position)
         
     def up(self):
-    	new_y = paddle.ycor +20
-    	paddle.goto(paddle.xcor(), new_y)
+    	new_y = self.ycor +20
+    	self.goto(paddle.xcor(), new_y)
 
         
     def down(self):
-    	new_y = paddle.ycor -20
-    	paddle.goto(paddle.xcor(), new_y)
+    	new_y = self.ycor -20
+    	self.goto(paddle.xcor(), new_y)
     	
