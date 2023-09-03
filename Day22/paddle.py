@@ -7,6 +7,8 @@ from turtle import Turtle
 # y_pos = 0
 
 
+# Define constants:	
+
 
 class Paddle(Turtle):
 		def __init__(self,position):
