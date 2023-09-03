@@ -2,6 +2,7 @@ from turtle import Turtle, Screen
 from paddle import Paddle
 from ball import Ball
 import time
+from scoreboard import Scoreboard
 
 # setup Screen:
 
@@ -15,8 +16,10 @@ r_paddle = Paddle((350,0))
 l_paddle = Paddle((-350,0))
 
 ball = Ball()
+scoreboard = Scoreboard()
 
 game_on = True
+
 screen.listen()
 
 # r_paddle movement control:
@@ -30,10 +33,29 @@ screen.onkey(l_paddle.up, "w")
 screen.onkey(_paddle.down, "s")
 
 while game_on:
+	
 	time.sleep(0.1)
 	screen.update() 
-	ball.movement() 
+	ball.movement()
+	
+	# Detect Ball collision with wall:
+	
+	if ball.ycor() > 280 or ball.ycor() < -280:
+		ball.bounce_y()
 
-
+	# Detect collision with r_paddle:
+	if ball.distance(r_paddle)< 50 and ball.xcor() >340 or ball.distance(l_paddle) < 50 and ball.xcor()< -340:
+			ball.bounce_x()
+	
+	
+  # Point for left:
+  	if ball.xcor() > 380:
+  		ball.reset_position()
+  		scoreboard.l_point()
+  
+  #Point for right:
+  	if ball.xcor()< -380:
+  		ball.reset_position()
+  		scoreboard.r_point()
 
 screen.exitonclick()
