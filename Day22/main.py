@@ -1,5 +1,8 @@
 from turtle import Turtle, Screen
 from paddle import Paddle
+from ball import Ball
+import time
+
 # setup Screen:
 
 screen = Screen()
@@ -11,8 +14,9 @@ screen.tracer(0). # controls animation, by setting 0 it removes the animation
 r_paddle = Paddle((350,0))
 l_paddle = Paddle((-350,0))
 
-game_on = True
+ball = Ball()
 
+game_on = True
 screen.listen()
 
 # r_paddle movement control:
@@ -26,7 +30,9 @@ screen.onkey(l_paddle.up, "w")
 screen.onkey(_paddle.down, "s")
 
 while game_on:
+	time.sleep(0.1)
 	screen.update() 
+	ball.movement() 
 
 
 
