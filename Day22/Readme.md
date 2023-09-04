@@ -35,4 +35,5 @@ To run this Pong Game on your local machine, follow these steps:
 
 I'd love to hear your thoughts on this project and any suggestions for improvements. Feel free to open an issue or submit a pull request if you'd like to contribute.
 
-Happy⬤
+
+Happy gaming, and let's keep the code journey exciting! 🎮🚀
