@@ -16,7 +16,6 @@ class CarManager:
 
     def create_car(self):
         random_chance = random.randint(1, 6)
-
         if random_chance == 1:  # every 6 times the while loop runs, a car will be generated.
             new_car = Turtle("square")
             new_car.shapesize(stretch_wid=1, stretch_len=2)  # 20 x 400
@@ -27,7 +26,6 @@ class CarManager:
             self.all_cars.append(new_car)
 
     def move_cars(self):
-
         for car in self.all_cars:
             car.backward(self.car_speed)
 
