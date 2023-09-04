@@ -1,0 +1,18 @@
+import time
+from turtle import Screen
+from Player import Player
+from car_manager import CarManager 
+from scoreboard import Scoreboard
+
+
+# setup screen:
+	
+screen = Screen()
+screen.setup(width-600, height=600)
+screen.tracer(0).  # remove animation
+	
+game_on = True
+while game_on:
+	time.sleep(0.1)
+	screen.update()	
+	
