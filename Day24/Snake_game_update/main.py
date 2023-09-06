@@ -14,7 +14,7 @@ screen.tracer(0)  # Turns off the animation, however, in order to see anything, 
 
 snake = Snake()
 food = Food()
-scoreboard = Scoreboard ()
+scoreboard = Scoreboard()
 
 screen.listen()
 screen.onkey(snake.up, "Up")
