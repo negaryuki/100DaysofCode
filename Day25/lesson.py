@@ -45,7 +45,6 @@ max_value = data["temp"].max()
 print(max_value)
 
 # -------------------------------------------------------
-
 # Get Data in columns:
 
 condition1 = data["condition"]
@@ -63,3 +62,25 @@ required_row = data[data.day == "Monday"]
 print(required_row)
 
 row_max_temp = data[data.temp == max_value]
+
+monday = data[data.day == "Monday"]
+print(monday.condition)
+
+# converting celcius to farenheit --> C x (9/5) +32
+
+mon_celcius = int(monday.temp)
+mon_farenheit = mon_celcius * (9/5) + 32
+
+# -------------------------------------------------------
+# Create dataframe from scratch:
+  
+data_dict = {
+  "students":["Amy", "James", "Angela"] , 
+  "scores" : [76, 56, 65]
+}
+
+data2 = pandas.DataFrame(data_dict)
+print(data2)
+
+data.to_csv('new_data.csv')  # creates a new csv data in the same path
+  
