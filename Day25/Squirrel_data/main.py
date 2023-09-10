@@ -15,7 +15,7 @@ black_count = len(data["Primary Fur Color"] == "Black")
 # Construct Dataframe:
 
 # step 1- Create Dictionary
- data_dict = {
+data_dict = {
    "Fur color" : ["Gray","Cinnamon", "Black"],
    "Count" :[gray_count, red_count, black_count]
  } 
