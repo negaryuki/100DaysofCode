@@ -41,7 +41,25 @@ print(average)
 # -------------------------------------------------------
 
 max_value = data["temp"].max()
-
+        # = data.temp.max()
 print(max_value)
 
 # -------------------------------------------------------
+
+# Get Data in columns:
+
+condition1 = data["condition"]
+
+print(condition1)
+
+#alternative way, but be careful, the spelling must be exact
+
+condition2 = data.condition
+
+# -------------------------------------------------------
+# Get data in Row:
+  
+required_row = data[data.day == "Monday"]
+print(required_row)
+
+row_max_temp = data[data.temp == max_value]
