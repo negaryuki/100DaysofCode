@@ -27,3 +27,16 @@ with open("file2.txt") as file2:
 results2 = [int(n.strip()) for n in file1_data if n in file2_data]
 
 print(results2)
+
+#--------------------------------------------------
+
+# EXERCISE 04 - Use dictionary Comprehension to create a dictionary called result3 that takes each word in the given sentence and calculates the number of letters in each word.
+
+sentence = "What is the Airspeed Velocity of an Unladen Swallow?"
+
+split_sentence = sentence.split()
+result3 ={word:len(word) for word in split_sentence}
+
+print(result3) 
+
+
