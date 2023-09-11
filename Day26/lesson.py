@@ -80,3 +80,29 @@ print(student_scores)
 passed_students= {student:score for (student, score) in student_scores.items() if score > 60}
 
 print(passed_students)
+
+#-------------------------------------------
+
+# Looping through a DataFrame:
+  
+# Loop through rows of a DataFrame:
+# for (index,row) in DataFrame.iterrows():
+#    print(row.score) or print(index)
+
+import pandas
+
+student_dict = {
+  "student" :["Angela", "James", "Lily"],
+  "score" :[ 56, 76, 98]
+}
+
+student_data_frame= pandas.DataFrame(student_dict)
+
+for (index,row) in student_data_frame.iterrows():
+  print(row.student)
+  print(row.score)
+  
+  if row.student == "James":
+    print(row.score)
+
+
