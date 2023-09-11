@@ -58,3 +58,25 @@ upper_case_names = [n.upper() for n in names if len(n) > 5]
 
 print(upper_case_names)
 #-------------------------------------------
+# Dictionary Comprehension:
+
+# new_dict = {new_key:new_value for item in list/range/string}
+
+# new_dict = {new_key:new_value for for (keey,value) in dict.items()}
+
+# new_dict = {new_key:new_value for for (key,value) in dict.items() if test}
+
+#-------------------------------------------
+import random
+
+names2 = ["Alex", "Beth", "Caroline", "Dave", "Eleanor","Freddie"]
+
+student_scores = {student:random.randint(1,100) for student in names}
+
+print(student_scores)
+
+#-------------------------------------------
+
+passed_students= {student:score for (student, score) in student_scores.items() if score > 60}
+
+print(passed_students)
