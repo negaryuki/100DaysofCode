@@ -14,7 +14,6 @@ data = pandas.read_csv("50_states.csv")
 
 all_states = data.state.to_list()
 
-
 # -------------------------------------------------
 
 # This function helps to find the xcor and ycor in a picture whenever you click on it
@@ -34,9 +33,9 @@ while len(guessed_states) < 50:  # 50 states
                                     prompt="what's another State?").title()
 
     if answer_state == "Exit":  # States to Learn
-        
-        missing_states = [state for state in all_states if state not in guessed_states]    # changed this lline with List comprehension 
 
+        missing_states = [state for state in all_states if state not in guessed_states]  # changed this lline with
+        # List comprehension
 
         new_data = pandas.DataFrame(missing_states)
         new_data.to_csv("states_to_learn.csv")
@@ -45,7 +44,7 @@ while len(guessed_states) < 50:  # 50 states
 
     if answer_state in all_states:
         guessed_states.append(answer_state)
-        
+
         # create turtle to write down the name in the map
         t = turtle.Turtle()
         t.hideturtle()
