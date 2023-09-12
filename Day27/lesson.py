@@ -34,5 +34,25 @@ def add(*args):
 add(2,5,4)
 
 #---------------------------------------------------
+# Keyword Arguments:
+  
+def example(**kwargs):  # This Function can accept unlimited keyword arguments)
+  print(kwargs)
+  # for key, value in kwargs.item()
+  #  print(key)
+  #  print(value)
+  
+example(add= 3, multiply= 5)  
+
+# Example:
+  
+def calculator(input_number, **kwargs):
+  input_number += kwargs["add"]
+  input_number *= kwargs["multiply"]
+  print(input_number)
+  
+calculator(2,add=3 , multiply=4)
+
+#---------------------------------------------------
 
 window.mainloop() # acts like a while loop and keeps the window on the screen. this must always be at the end of the program
