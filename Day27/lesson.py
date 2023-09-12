@@ -63,5 +63,38 @@ class Car:
 
 my_car = Car(make= "Nissan")
 #---------------------------------------------------
+# configure and change properties of a created component:
+  
+my_lable["text"] = "new text" # as if it was a dictionary
+
+# or 
+
+my_lable.config(text= "Another new text")
+
+#---------------------------------------------------
+# Buttons and actions:
+
+# step 1 - create Function as a "command" for the Button
+
+def button_click():
+  print("you clicked the Button")
+  my_lable.config(text= "Button got clicked")
+
+# step 2 - create button -> type (not call) the command kw
+  
+button = tkinter.Button(text = "click here", command= button_click())
+
+# step 3- Display button:
+
+button.pack()
+
+#--------------------------------------------------- 
+# Entry component(Input):
+
+input= Entry(width=10) 
+input.pack()
+input.get()  # returns the input as a string    
+
+#---------------------------------------------------
 
 window.mainloop() # acts like a while loop and keeps the window on the screen. this must always be at the end of the program
