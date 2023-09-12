@@ -53,6 +53,15 @@ def calculator(input_number, **kwargs):
   
 calculator(2,add=3 , multiply=4)
 
+# Example2:
+
+class Car:
+  
+  def __init__(self,**kw):
+    self.make =kw.get("make").  # instead of writing kw["make"] we can use the get function. the difference is that if we dont input a value for either key it will return "none" instead of giving an error
+    self.model =kw.model("model")
+
+my_car = Car(make= "Nissan")
 #---------------------------------------------------
 
 window.mainloop() # acts like a while loop and keeps the window on the screen. this must always be at the end of the program
