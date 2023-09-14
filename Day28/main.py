@@ -7,18 +7,17 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = 5
-SHORT_BREAK_MIN = 1
-LONG_BREAK_MIN = 3
+WORK_MIN = 0.1
+SHORT_BREAK_MIN = 0.1
+LONG_BREAK_MIN = 0.1
 reps = 0
 my_timer = None
-running = False  # Variable to track if the timer is running
+
 
 # ------------------- TIMER RESET ------------------------
 def reset_timer():
-    global reps, running
+    global reps
     reps = 0
-    running = False  # Reset the running variable
     window.after_cancel(my_timer)
     canvas.itemconfig(timer_text, text="00:00")
     title_label.config(text="Timer")
@@ -26,43 +25,43 @@ def reset_timer():
 
 # ------------------- TIMER MECHANISM ---------------------
 def start_timer():
-    global reps, running
-    if not running:
-        running = True
-        reps += 1
-        work_sec = WORK_MIN * 60
-        short_break_sec = SHORT_BREAK_MIN * 60
-        long_break_sec = LONG_BREAK_MIN * 60
+    global reps
+    reps += 1
 
-        if reps % 8 == 0:
-            count_down(long_break_sec)
-            title_label.config(text="Break", fg=RED)
-        elif reps % 2 == 0:
-            count_down(short_break_sec)
-            title_label.config(text="Break", fg=PINK)
-        else:
-            count_down(work_sec)
-            title_label.config(text="WORK", fg=GREEN)
-            if reps % 2 == 1:
-                checkmark_label.config(text="")
-            work_session = math.floor(reps / 2)
-            marks = ""
-            for i in range(work_session):
-                marks += "✔"
-            checkmark_label.config(text=marks, font=(FONT_NAME, 22, "bold"))
+    work_sec = WORK_MIN * 60
+    short_break_sec = SHORT_BREAK_MIN * 60
+    long_break_sec = LONG_BREAK_MIN * 60
+
+    if reps % 8 == 0:
+        count_down(long_break_sec)
+        title_label.config(text="Break", fg=RED)
+    elif reps % 2 == 0:
+        count_down(short_break_sec)
+        title_label.config(text="Break", fg=PINK)
+    else:
+        count_down(work_sec)
+        title_label.config(text="WORK", fg=GREEN)
 
 # ------------------ COUNTDOWN MECHANISM ------------------
 def count_down(count):
     global my_timer
     count_min = math.floor(count / 60)
     count_sec = count % 60
+
     if count_sec < 10:
         count_sec = f'0{count_sec}'
     canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec}")
+
     if count > 0:
         my_timer = window.after(1000, count_down, count - 1)
     else:
         start_timer()  # Restart the timer after countdown finishes
+        work_session = math.floor(reps / 2)
+        marks = ""
+        for i in range(work_session):
+            marks += "✔"
+            checkmark_label.config(text=marks, font=(FONT_NAME, 22, "bold"))
+
 
 # ------------------- UI SETUP ----------------------------
 window = Tk()
