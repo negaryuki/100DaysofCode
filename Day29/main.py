@@ -28,5 +28,20 @@ mail_user_label.grid(row=2,column=0)
 password_label = Label(text="Password:")
 password_label.grid(row=3,column=0)
 
+# ------------------- Button ------------------------------------
+
+website_button = Button(text="Passwordvgcfjgcvj:")
+website_button.grid(row=1, column=1, columnspan=2)
+
+mail_user_button = Button(text="Emailhjfhvjvj")
+mail_user_button.grid(row=2,column=1,columnspan=2)
+
+gen_pass_button = Button(text="Generate Password")
+gen_pass_button.grid(row=3,column=2)
+
+add_button = Button(text="Add")
+add_button.grid(row=4,column=1)
+
+
 
 window.mainloop()
