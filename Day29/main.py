@@ -6,7 +6,6 @@ import pyperclip
 
 # ------------------- PASSWORD GENERATOR -------------------------
 def generate_password():
-
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
                'u', 'v',
                'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
@@ -18,15 +17,16 @@ def generate_password():
     # Clear the password_entry widget
     password_entry.delete(0, END)
 
-    password_list = [random.choice(letters) for char in range(random.randint(8,10))]
-    password_list += [random.choice(numbers) for char in range(random.randint(2,4))]
-    password_list += [random.choice(symbols) for char in range(random.randint(2,4))]
+    password_list = [random.choice(letters) for char in range(random.randint(8, 10))]
+    password_list += [random.choice(numbers) for char in range(random.randint(2, 4))]
+    password_list += [random.choice(symbols) for char in range(random.randint(2, 4))]
 
     random.shuffle(password_list)
 
     password = "".join(password_list)
-    password_entry.insert(0, f"{password }")
+    password_entry.insert(0, f"{password}")
     pyperclip.copy(password)
+
 
 # ------------------- SAVE PASSWORD ------------------------------
 def save():
