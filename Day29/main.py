@@ -1,7 +1,23 @@
 from tkinter import *
+from tkinter import messagebox
+
 
 # ------------------- PASSWORD GENERATOR -------------------------
 # ------------------- SAVE PASSWORD ------------------------------
+def save():
+    global is_ok
+    website = website_entry.get()  # get() method is used to retrieve the current value of an Entry widget
+    email = mail_user_entry.get()
+    password = password_entry.get()
+
+    is_ok = messagebox.askokcancel(title=website,
+                                   message=f'These are the details entered:\n Website: {website}\n Email: {email}\n '
+                                           f'Password: {password}\n Is it Ok to Save?')
+    if is_ok:
+        with open("data.text", mode='a') as data:
+            data.write(f"{website} | {email} | {password}\n")
+            website_entry.delete(0, END)  # delete() removes the characters we entered after triggering the button
+            password_entry.delete(0, END)
 
 
 # ------------------- UI SETUP -----------------------------------
@@ -46,7 +62,7 @@ password_entry.grid(row=3, column=1)
 gen_pass_button = Button(text="Generate Password", width=15)
 gen_pass_button.grid(row=3, column=2, columnspan=2)
 
-add_button = Button(text="Add", width=38)
+add_button = Button(text="Add", width=38, command=save)
 add_button.grid(row=4, column=1, columnspan=2)
 
 window.mainloop()
