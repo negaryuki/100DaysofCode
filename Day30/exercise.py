@@ -28,6 +28,12 @@ fb_posts = [
 total_likes = 0
   
 for posts in fb_posts:
-  total_likes += posts["Likes"]
+  try:
+    total_likes += posts["Likes"]
     
+  except KeyError:
+    # total_error += 0
+    pass
+  
+print(total_likes)
     
