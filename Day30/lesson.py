@@ -19,4 +19,24 @@ else:
 finally:
   file.close()
   print("File was closed")
+ 
+#-------------------------------------------------------------
+
+ # When to create our own exception and error
+ 
+# Example: BMI calculator
+# we will add an error that does not allow un reasonable heights
+
+height = float(input("Height:"))
+weight = int(input("Weight:"))
+
+if height > 3:
+  raise ValueError(" Human Height should not be over 3 meters")
+
+bmi = weight / height ** 2
+
+print(bmi)
+
+  
+
 
