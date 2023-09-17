@@ -36,4 +36,36 @@ for posts in fb_posts:
     pass
   
 print(total_likes)
+
+
+#-------------------------------------------------------------------------------
+
+# Exercise03 - Error Handeling the NATO Phonetic Program, in case numbers re entered instead of letters
+
+import pandas
+
+
+# extract data from csv file:
+data = pandas.read_csv("nato_phonetic_alphabet.csv")
+
+phonetic_dict = {row.letter: row.code for (index,row) in data.iterrows()}
+
+
+def Generate_phonetic():
+  word = input("enter a word:\n").upper()
+  
+# Include en exceptional error so that it won't crash even if we input numbers instea of letters
+    
+  try:
+    output_list  = [phonetic_dict[letter] for letter in word] 
+  
+  except KeyError:
+    print("Sorry! Only use letters")
+    Generate_phonetic()
+  
+  else:
+    print(output_list)
+    
+  
+Generate_phonetic()
     
