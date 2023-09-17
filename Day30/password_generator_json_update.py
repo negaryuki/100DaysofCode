@@ -40,31 +40,30 @@ def save():
       }  
     }
     
-    if len(website) == 0 or len(email) == 0 or len(password) == 0:
+        if len(website) == 0 or len(email) == 0 or len(password) == 0:
         messagebox.showinfo("Empty fields", "Hey! Please fill out all fields")
     
     else:
-        with open("data.json", mode='w') as data:   #"r" #"w"
         
-          #------ creating a json file------
+        try:
+          with open("data.json", mode='w') as data:
+            data_file = json.load(data)
+            
+          except FileNotFoundError:
+            with open("data.json", mode='r') as data:
+              json.dump(new_data, data, indent=4)
           
-          json.dump(new_data,data,indent =4)
-          
-          #------reading a Json file--------
-          
-          #my_data = json.load(data)
-          #print(my_data)
-          
-          #---Appendin/Updating a Json file---
-          
-          #my_data= json.load(data)
-          #my_data.update(new_data)
-          #json.dump(my_data,data, indent=4)
-          
-          
-          
-          website_entry.delete(0, END)  # delete() removes the characters we entered after triggering the button
-          password_entry.delete(0, END)
+          else:
+            data_file.update(new_data)
+            
+            with open("data.json", "w") as data:
+              json.dump(data_file,data, indent=4)
+              
+         finally:
+           website_entry.delete(0, END)  # delete() removes the characters we entered after triggering the button
+           password_entry.delete(0, END)
+
+
 
 
 # ------------------- UI SETUP -----------------------------------
