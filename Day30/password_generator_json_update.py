@@ -6,7 +6,7 @@ import json
 
 # ------------------- PASSWORD GENERATOR -------------------------
 def generate_password():
-    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+
                'u', 'v',
                'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
                'Q', 'R',
@@ -62,9 +62,29 @@ def save():
          finally:
            website_entry.delete(0, END)  # delete() removes the characters we entered after triggering the button
            password_entry.delete(0, END)
+           
+# ------------------- FIND PASSWORD ------------------------------
 
-
-
+def find_password():
+  website = website_entry.get()
+  
+  try:
+    
+    with open(data.json) as data_file:
+      data = json.load(data_file)
+    
+  except FileNotFoundError:
+      messagebox.showinfo(title="Error", message= "No data fie found")
+      
+  else:     
+      if website in data:
+        email = data[website]["email"]
+        password = data[website]["password"]
+        messagebox.showinfo(title=webiste, messege = f' Email: {email}\nPassword:{password}')
+      
+      else:
+        messagebox.showinfo(title="Error", message= f"No details for {website} exists")  
+      
 
 # ------------------- UI SETUP -----------------------------------
 
@@ -92,8 +112,8 @@ password_label.grid(row=3, column=0)
 
 # ------------------- ENTRY ------------------------------------
 
-website_entry = Entry(width=40)
-website_entry.grid(row=1, column=1, columnspan=2)
+website_entry = Entry(width=21)
+website_entry.grid(row=1, column=1)
 website_entry.focus()  # When a widget has the focus, it means that it is ready to accept user input
 
 mail_user_entry = Entry(width=40)
@@ -110,5 +130,8 @@ gen_pass_button.grid(row=3, column=2, columnspan=2)
 
 add_button = Button(text="Add", width=38, command=save)
 add_button.grid(row=4, column=1, columnspan=2)
+
+search_button = Button(text="search", width=13, command= find_password)
+search_button.grid(row=1,column=2)
 
 window.mainloop()
