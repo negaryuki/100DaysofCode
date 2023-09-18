@@ -6,7 +6,7 @@ import json
 
 # ------------------- PASSWORD GENERATOR -------------------------
 def generate_password():
-
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
                'u', 'v',
                'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
                'Q', 'R',
@@ -40,8 +40,8 @@ def save():
       }  
     }
     
-        if len(website) == 0 or len(email) == 0 or len(password) == 0:
-        messagebox.showinfo("Empty fields", "Hey! Please fill out all fields")
+    if len(website) == 0 or len(email) == 0 or len(password) == 0:
+         messagebox.showinfo("Empty fields", "Hey! Please fill out all fields")
     
     else:
         
@@ -49,11 +49,11 @@ def save():
           with open("data.json", mode='w') as data:
             data_file = json.load(data)
             
-          except FileNotFoundError:
+        except FileNotFoundError:
             with open("data.json", mode='r') as data:
               json.dump(new_data, data, indent=4)
           
-          else:
+        else:
             data_file.update(new_data)
             
             with open("data.json", "w") as data:

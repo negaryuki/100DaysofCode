@@ -7,13 +7,13 @@ BACKGROUND_COLOR = "#B1DDC5"
 data = pandas.read_csv("data/french_words.csv")
 to_learn = data.to_dic(orient="records")
 
-curent_card ={}
+current_card ={}
 
 
 #-------------- NEXT CARD COMMAND ---------------
 
-def next_card()
-  global curent_card
+def next_card():
+  global current_card
   current_card =random.choice(to_learn)
   canvas.itemconfig(card_title,text="French", fill="black")  canvas.itemconfig(card_word, current_card["French"], fill = "black")
   canvas.itemconfig(card_background, image= card_front_img)
