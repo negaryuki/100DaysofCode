@@ -4,6 +4,7 @@ import random
 import pyperclip
 import json
 
+
 # ------------------- PASSWORD GENERATOR -------------------------
 def generate_password():
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
@@ -30,63 +31,58 @@ def generate_password():
 
 # ------------------- SAVE PASSWORD ------------------------------
 def save():
-    website = website_entry.get()  # get() method is used to retrieve the current value of an Entry widget
+    website = website_entry.get()
     email = mail_user_entry.get()
     password = password_entry.get()
     new_data = {
-      website: {
-        "email" : email,
-        "password" : password
-      }  
+        website: {
+            "email": email,
+            "password": password,
+        }
     }
-    
-    if len(website) == 0 or len(email) == 0 or len(password) == 0:
-         messagebox.showinfo("Empty fields", "Hey! Please fill out all fields")
-    
+
+    if len(website) == 0 or len(password) == 0:
+        messagebox.showinfo(title="Error", message="Please make sure you haven't left any fields empty.")
     else:
-        
         try:
-          with open("data.json", mode='w') as data:
-            data_file = json.load(data)
-            
+            with open("data.json", "r") as data_file:
+                data = json.load(data_file)
         except FileNotFoundError:
-            with open("data.json", mode='r') as data:
-              json.dump(new_data, data, indent=4)
-          
+            with open("data.json", "w") as data_file:
+                json.dump(new_data, data_file, indent=4)
         else:
-            data_file.update(new_data)
-            
-            with open("data.json", "w") as data:
-              json.dump(data_file,data, indent=4)
-              
-         finally:
-           website_entry.delete(0, END)  # delete() removes the characters we entered after triggering the button
-           password_entry.delete(0, END)
-           
+            data.update(new_data)
+            with open("data.json", "w") as data_file:
+                json.dump(data, data_file, indent=4)
+        finally:
+            website_entry.delete(0, END)
+            password_entry.delete(0, END)
+
+
 # ------------------- FIND PASSWORD ------------------------------
 
 def find_password():
-  website = website_entry.get()
-  
-  try:
-    
-    with open(data.json) as data_file:
-      data = json.load(data_file)
-    
-  except FileNotFoundError:
-      messagebox.showinfo(title="Error", message= "No data fie found")
-      
-  else:     
-      if website in data:
-        email = data[website]["email"]
-        password = data[website]["password"]
-        messagebox.showinfo(title=webiste, messege = f' Email: {email}\nPassword:{password}')
-      
-      else:
-        messagebox.showinfo(title="Error", message= f"No details for {website} exists")  
-      
+    website = website_entry.get()
 
-# ------------------- UI SETUP -----------------------------------
+    try:
+
+        with open("data.json") as data_file:
+            data = json.load(data_file)
+
+    except FileNotFoundError:
+        messagebox.showinfo(title="Error", message="No data fie found")
+
+    else:
+        if website in data:
+            email = data[website]["email"]
+            password = data[website]["password"]
+            messagebox.showinfo(title=website, message=f' Email: {email}\nPassword:{password}')
+
+        else:
+            messagebox.showinfo(title="Error", message=f"No details for {website} exists")
+
+        # ------------------- UI SETUP -----------------------------------
+
 
 window = Tk()
 window.title("Password Generator")
@@ -131,7 +127,7 @@ gen_pass_button.grid(row=3, column=2, columnspan=2)
 add_button = Button(text="Add", width=38, command=save)
 add_button.grid(row=4, column=1, columnspan=2)
 
-search_button = Button(text="search", width=13, command= find_password)
-search_button.grid(row=1,column=2)
+search_button = Button(text="search", width=13, command=find_password)
+search_button.grid(row=1, column=2)
 
 window.mainloop()
