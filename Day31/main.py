@@ -4,12 +4,17 @@ import pandas
 
 BACKGROUND_COLOR = "#B1DDC5"
 current_card = {}
+to_learn = {}
 
-#-------------- READ PANDA VSC ---------------
+#-------------- READ PANDA CSV ---------------
 
-data = pandas.read_csv("data/french_words.csv")
-to_learn = data.to_dict(orient="records")
-
+try:
+  data = pandas.read_csv("data/words_to_learn.csv")
+except FileNotFoundError:
+  original_data = pandas.read_csv("data/french_words.csv")
+  to_learn = original_data.to_dict(orient ="records")
+else:  
+  to_learn = data.to_dict(orient="records")
 
 #-------------- NEXT CARD FUNCTION ---------------
 
@@ -21,7 +26,7 @@ def next_card():
   to_learn_french= current_card["French"]
   
   canvas.itemconfig(card_title, text= "French", fill = "black")
-  canvas.itemconfig(card_word, text=to_learn_french, fill="black")
+  canvas.itemconfig(card_word, text=to_learn_french, fill="black")a
   canvas.itemconfig(card_background, image=card_front_img)
   
   flip_timer = window.after(3000,func=flip_card)
@@ -35,8 +40,19 @@ def flip_card():
   canvas.itemconfig(card_word, text= to_learn_english, fill= "white")
 
   canvas.itemconfig(card_background, image =canvas_back_img)
-  
 
+#-------------- IS_KNOWN FUNCTION ---------------
+
+def is_known():
+  to_learn.remove(current_card)
+  next_card()
+  
+  # in order to keep hold of the words we have to learn, we have to save it to a list: 
+
+  data = pandas.DataFrame(to_dict,index = False)
+  data.to_csv("data/words_to_learn.csv")
+  
+  
 #-------------- SETUP WINDOW ---------------
 
 window = Tk()
@@ -77,7 +93,7 @@ check_img = PhotoImage(file="Images/right.png")
 unknown_button= Button(image=cross_img, highlighttickness=0, command = next_card)
 unknown_button.grid(row=1,column=0, columnspan=1)
 
-known_button= Button(image=check_img, highlighttickness=0, command=next_card)
+known_button= Button(image=check_img, highlighttickness=0, command=is_known)
 known_button.grid(row=1,column1)
 
 next_card()
