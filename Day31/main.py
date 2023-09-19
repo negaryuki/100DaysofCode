@@ -1,64 +1,84 @@
 from tkinter import *
-import pandas
 import random
+import pandas
 
 BACKGROUND_COLOR = "#B1DDC5"
+current_card = {}
+
+#-------------- READ PANDA VSC ---------------
 
 data = pandas.read_csv("data/french_words.csv")
-to_learn = data.to_dic(orient="records")
-
-current_card ={}
+to_learn = data.to_dict(orient="records")
 
 
-#-------------- NEXT CARD COMMAND ---------------
+#-------------- NEXT CARD FUNCTION ---------------
 
 def next_card():
-  global current_card
-  current_card =random.choice(to_learn)
-  canvas.itemconfig(card_title,text="French", fill="black")  canvas.itemconfig(card_word, current_card["French"], fill = "black")
-  canvas.itemconfig(card_background, image= card_front_img)
-  window.after(3000,func=flip_card)
+  global current_card, flip_timer
+  
+  window.after_cancel(flip_timer)    #invalidate timer
+  current_card = random.choice(to_learn)
+  to_learn_french= current_card["French"]
+  
+  canvas.itemconfig(card_title, text= "French", fill = "black")
+  canvas.itemconfig(card_word, text=to_learn_french, fill="black")
+  canvas.itemconfig(card_background, image=card_front_img)
+  
+  flip_timer = window.after(3000,func=flip_card)
 
-#-------------- FLIP CARD COMMAND ---------------
-
+#-------------- FLIP CARD FUNCTION ---------------
+ 
 def flip_card():
-  canvas.itemconfig(card_title,text="English", fill ="white")
-  canvas.itemconfig(card_word, text= current_card["English"], fill= "white")  
-  canvas.itemconfig(card_background,image = card_back_img)
+  to_learn_english= current_card["English"]
+    
+  canvas.itemconfig(card_title, text= "English", fill= "white")
+  canvas.itemconfig(card_word, text= to_learn_english, fill= "white")
 
-#-------------- Setup window ---------------
-window= Tk()
-window.title("Flash Cards")
+  canvas.itemconfig(card_background, image =canvas_back_img)
+  
+
+#-------------- SETUP WINDOW ---------------
+
+window = Tk()
+window.title('Flash Card Learner')
 window.config(padx=50,pady=50, bg=BACKGROUND_COLOR)
 
-window.after(3000,func=flip_card)
+flip_timer = window.after(3000,func=flip_card)
 
-#-------------- Canvas----------------------
-  
-canvas = Canvas(width=800,height=526)
-card_front_img = PhotoImage(file="images/card_front.png")
+#------------------- CANVAS ---------------
 
-card_back_img =PhotoImage(file="images/card_back.png")
+canvas = Canvas(width=800, height=526)
 
-card_background = canvas.create_image(400, 263,image=card_front_img)
+# import pictures:
+card_front_img = PhotoImage(file="Images/card_front.png")
+card_back_img= PhotoImage(file="Images/card_back.png")
 
- 
-card_title= canvas.create_text(400,150, text="Title", font=("Ariel", 40, "italic"))
-card_word= canvas.create_text(400,263, text="word",font=("Ariel",60,"bold)")
+canvas_background = canvas.create_image(400,263, image = card_front_img)
 
-canvas.config(bg=BACKGROUND_COLOR, highlightthickness=0)
+#------------------- Canvas text ---------------
+
+canvas_title =canvas.create_text(400,150, text="English/French", font=("Arial", 40, "italic")) 
+
+canvas_word = canvas.create_text(400,263, text ="WPRD", font = ("Arial", 60,"Bold"))
+
+canvas.config(bg=BACKGROUND_COLOR, highlighttickness=0)
 canvas.grid(row=0,column=0)
 
+#------------------- BUTTONS ---------------
 
-#-------------- Button----------------------
+# import pictures:
 
-cross_img = PhotoImage(images/wrong.png)
-unknown_button= Button(image=cross_img, highlightthickness=0, command=next_card)
+cross_img = PhotoImage(file="Images/wrong.png")
+check_img = PhotoImage(file="Images/right.png")
+
+
+# creating buttons:
+  
+unknown_button= Button(image=cross_img, highlighttickness=0, command = next_card)
 unknown_button.grid(row=1,column=0, columnspan=1)
 
-check_img = PhotoImage(images/right.png)
-known_button= Button(image=check_img, highlightthickness=0)
-known_button.grid(row=1,column=1)
+known_button= Button(image=check_img, highlighttickness=0, command=next_card)
+known_button.grid(row=1,column1)
 
 next_card()
 
