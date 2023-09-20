@@ -5,7 +5,7 @@ import random
 
 # Mail info:
 my_email = "python@gmail.com"
-password ="python"
+password = "python"
 
 # TODAY:
 now = dt.datetime.now()
@@ -26,23 +26,20 @@ for index, row in data.iterrows():
     bday_name = row["name"]
 
     if today_day == bday_day and today_month == bday_month:
-      
         with open(f"letters/{letter}", "r") as text:
             letter_data = text.read()
             letter_data = letter_data.replace("[name]", bday_name)
 
         with open(f"letters/{letter}", 'w') as main_text:
             main_text.write(letter_data)
-            
+
         with smtplib.SMTP("smtp.gmail.com") as connection:
-      
-         connection.starttls()
-         connection.login(user= my_email, password= password)
-         connection.sendmail(
-         from_addr = my_email, 
-         to_addrs = my_email,
-         msg=f"Subject:Happy Birthday {bday_name}\n\n {letter_data}"
-         )
-         
+            connection.starttls()
+            connection.login(user=my_email, password=password)
+            connection.sendmail(
+                from_addr=my_email,
+                to_addrs=my_email,
+                msg=f"Subject:Happy Birthday {bday_name}\n\n {letter_data}"
+            )
 
 #        print(f'Happy Birthday {bday_name}\nToday is {bday_month}/{bday_day}\n{letter_data}')
