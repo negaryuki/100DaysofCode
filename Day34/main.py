@@ -12,16 +12,24 @@ class QuizInterface:
     self.window.title("Quizzler")
     self.window.config(padx=20,pady=20,bg= THEME_COLOR)
     
-#------------------- CANVAS ---------------    
+#------------------- CANVAS ----------------    
     
-    self.canvas = Canvas(width=300, height=250)
-    self.canvas, 
+    self.canvas = Canvas(width=300, height=250, bg= "white")
     
-    self.canvas = Canvas(width=800, height=526)
-    self.canvas_text =canvas.create_text(400,150, text="Question", font=("Arial", 20, "italic")) 
-    self.canvas.config(bg= "white", highlighttickness=0)
-    self.canvas.grid(row=0,column=0)
-
+    self.question_text =self.canvas.create_text(
+      150,
+      125,
+      text="Question", 
+      fill = THEME_COLOR,
+      font=("Arial", 20, "italic"
+      )     
+    self.canvas.grid(row=1,column=0,columnspan = 0, pady =50)
+    
+#------------------- LABEL  ---------------    
+    
+    self.score_label = Label(text="score: 0" , fg ="white" , bg= THEME_COLOR )
+    self.score_label.grid(row=0, column=1)
+   
 #------------------- BUTTONS ---------------
 
     # import pictures:
@@ -31,10 +39,10 @@ class QuizInterface:
     # creating buttons:
       
     self.wrong_button= Button(image=cross_img, highlighttickness=0, command = "no score")
-    self.wrong_button.grid(row=2,column=0)
+    self.wrong_button.grid(row=2,column=1)
     
     self.right_button= Button(image=check_img, highlighttickness=0, command="plus score")
-    self.right_button.grid(row=2,column=1)
+    self.right_button.grid(row=2,column=0)
 
 
     self.window.mainloop()
