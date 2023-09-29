@@ -1,40 +1,17 @@
-from tkinter import *
+from question_model import Question
+from data import question_data
+from quiz_brain import QuizBrain
+from ui import QuizInterface
 
-THEME_COLOR = '#375362'
+question_bank = []
+for question in question_data:
+    question_text = question["question"] s
+    question_answer = question["correct_answer"]
+    new_question = Question(question_text, question_answer)
+    question_bank.append(new_question)
 
- 
-class QuizInterface:
-  
-  def __init__(self):
-    
-#-------------- SETUP WINDOW ---------------
-    self.window = Tk()
-    self.window.title("Quizzler")
-    self.window.config(padx=20,pady=20,bg= THEME_COLOR)
-    
-#------------------- CANVAS ---------------    
-    
-    self.canvas = Canvas(width=300, height=250)
-    self.canvas, 
-    
-    self.canvas = Canvas(width=800, height=526)
-    self.canvas_text =canvas.create_text(400,150, text="Question", font=("Arial", 20, "italic")) 
-    self.canvas.config(bg= "white", highlighttickness=0)
-    self.canvas.grid(row=0,column=0)
+quiz = QuizBrain(question_bank)
+quiz_ui = QuizInterface(quiz)
 
-#------------------- BUTTONS ---------------
-
-    # import pictures:
-    cross_img = PhotoImage(file="Images/IMG_0462.png")
-    check_img= PhotoImage(file="Images/IMG_0463.png")
-    
-    # creating buttons:
-      
-    self.wrong_button= Button(image=cross_img, highlighttickness=0, command = "no score")
-    self.wrong_button.grid(row=2,column=0)
-    
-    self.right_button= Button(image=check_img, highlighttickness=0, command="plus score")
-    self.right_button.grid(row=2,column=1)
-
-
-    self.window.mainloop()
+print("You've completed the quiz")
+print(f"Your final score is: {quiz.score}/{quiz.question_number}")
