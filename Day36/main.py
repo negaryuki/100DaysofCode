@@ -1,5 +1,5 @@
 import requests
-
+from twilio.rest import Client
 
 STOCK_NAME = "TSLA"
 COMPANY_NAME = "Tesla Inc"
@@ -7,7 +7,8 @@ STOCK_ENDPOINT = "https://www.alphavantage.co/query"
 NEWS_ENDPOINT = "https://newsapi.org/v2/everything"
 ALPHA_VANTAGE_APIKEY = "****"
 NEWS_APIKEY = "****"
-
+TWILIO_SID ="****"
+TWILIO_AUTH_TOKEN = "****"
 
 #----------------- PARAMETERS -----------------------
 
@@ -45,9 +46,15 @@ day_before_yesterday_closing_price = day_before_yesterday_data["4.close"]
 
 # abs = absolute number (without negatives)
 
-difference = abs(float(yesterday_closing_price) - float(day_before_yesterday_closing_price)0
+difference = (float(yesterday_closing_price) - float(day_before_yesterday_closing_price)0
+up_down= None
 
-difference_percent = (difference / float(yesterday_closing_price)) * 100
+if difference > 0:
+    up_down = "🔺"
+else:
+    up_down = "🔻"
+
+difference_percent = round((difference / float(yesterday_closing_price)) * 100)
 
 
 #-------------------------------------------------
@@ -55,6 +62,20 @@ difference_percent = (difference / float(yesterday_closing_price)) * 100
 articles = news_data["articles"]
 three_articles = articles[:3]
 
+formatted_articles =[f"{STOCK_NAME}: {up_down}{difference_percent}%\nHeadlines:{article['title']}. \nBrief:{article['description']} for artice in three_articlels"]
 
-if difference_percent > 5:
-  print("Get News")
+#-------------------------------------------------
+
+if abs(difference_percent) > 5:
+
+  client = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
+  for article in formatted_articles:
+    message = client.messages.create(
+      body = article,
+      from= "1234"
+      to="1234"      
+      )
+
+
+
+
