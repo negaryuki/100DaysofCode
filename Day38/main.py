@@ -10,6 +10,7 @@ AGE = 28
 
 APP_ID = "APP_ID"
 API_KEY = "API_KEY"
+TOKEN = "TOKEN"
 
 excercise_endpoint = "https://trackapi.nutritionix.com/v2/natural/exercise"
 sheet_endpoint = "https://api.sheety.co/62bf219154ff52ae3cb0172f15a57ff7/myWorkout/workouts"
@@ -49,8 +50,16 @@ for exercise in result["exercises"]:
   }
 }
 
-sheet_response = requests.post(sheet_endpoint, json = input_sheet)
+# Add Authentication:
+  
+bearer_headers = {
+  "Authorization": f'Bearer {TOKEN}'
+  
+}
+
+sheet_response = requests.post(sheet_endpoint, json = input_sheet, headers = bearer_headers)
 
 print(sheet_response.text)
+
 
 
