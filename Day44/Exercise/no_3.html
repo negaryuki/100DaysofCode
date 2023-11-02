@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CSS Box Model</title>
+    <style type="text/css">
+      div {
+        height: 200px;
+        width: 200px;
+      }
+      p {
+        margin: 0;
+      }
+      
+      #first {
+        background-color: cadetblue;
+        padding: 20px; /* Padding adds space inside the element */
+        border: 10px solid black; /* Border defines the border around the element */
+      }
+      
+      #second {
+        background-color: gold;
+        border: solid black;
+        border-width: 20px 10px; /* You can set border width for each side individually */
+        margin-left: 250px; /* Margin adds space outside the element, pushing it to the right */
+      }
+      
+      #third {
+        background-color: indianred;
+        border: 10px solid black;
+        margin-left: 40px; /* Margin pushes the element to the right, creating space */
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div id="first">  
+      <p>This is Part 1</p>
+    </div>
+  
+    <div id="second">  
+      <p>This is Part 2</p>
+    </div>
+  
+    <div id="third">  
+      <p>This is Part 1</p>
+    </div>
+  </body>
+</html>
