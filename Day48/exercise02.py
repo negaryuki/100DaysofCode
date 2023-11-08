@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.webriver.common.by import By
-
+from selenium.webriver.common.keys import Keys
 
 # Keep Chrome browser open after program finishes
 chrome_options = webdriverChromeOptions()
@@ -13,3 +13,14 @@ driver.get("https://en.wikipedia.org/wiki/Main_Page")
 wp_number = driver.find_element_by_css_selector("#articlecount a")
 
 print(wp_number.text)
+# in order to click on a link
+# wp_number.click()
+
+all_portals = driver.find_element_by_link_text("All portals")
+all_portals.click()
+
+#typing and entering 
+
+search = driver.find_element_by_name("search")
+search.send_keys("Python")
+search.sen_keys(Keys,ENTER)
