@@ -2,6 +2,7 @@ from flask import Flask, render_template
 import random
 import time
 
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -12,3 +13,16 @@ def home():
     
 if __name__ =="__main__":
   app.run(debug=True)
+  
+  
+@app.route('/blog')
+def blog():
+  blog_url=""
+  blog_data= requests.get(blog_url)
+  all_posts = blog_data.json
+  
+  return render_template("blog.html", posts=all_posts)
+  
+
+if __name__ == "__main__":
+    app.run(debug=True)
