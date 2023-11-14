@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Agify</title>
+  </head>
+  
+  <body>
+  
+  <h1>Hey {{ name.title() }},</h1>
+  <h2>I think you are {{ gender }},</h2>
+  <h3>And maybe {{ age }} years old</h3>
+  </body>
+  
+</html>
