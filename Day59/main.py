@@ -2,7 +2,7 @@ from flask import Flask, render_template
 import requests
 
 
-posts = requests.get("NPOINT NPI").json()
+posts = requests.get("https://api.npoint.io/65afe472604da20eef6d").json()
 
 app = Flask(__name__)
 
