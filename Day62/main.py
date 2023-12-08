@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for
-from flask_bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired, URL
@@ -7,7 +7,7 @@ import csv
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
-Bootstrap(app)
+Bootstrap5(app)
 
 
 class CafeForm(FlaskForm):
@@ -35,7 +35,7 @@ def home():
     return render_template("index.html")
 
 
-@app.route('/add')
+@app.route('/add' , methods=["GET","POST"])
 def add_cafe():
     form = CafeForm()
     if form.validate_on_submit():
