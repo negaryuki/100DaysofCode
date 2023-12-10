@@ -54,6 +54,10 @@ def add():
 
     return render_template("add.html")
 
+@app.route('/edit')
+def edit():
+    if request.method=="POST":
+        book_id = request.form["id"]
 
 if __name__ == "__main__":
     app.run(debug=True)
