@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///new-books-collection.d"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///new-books-collection.db"
 db = SQLAlchemy()
 db.init_app(app)
 
@@ -25,27 +25,31 @@ def __repr__(self):
 with app.app_context():
     db.create_all()
 
-with app.app_context():
-    new_book = Book(id=1, title="Harry Potter", author= "J.K. Rowling", rating=9.3)
-    db.session.add(new_book)
-    db.session.commit()
+
+# with app.app_context():
+#     new_book = Book(id=1, title="Harry Potter", author= "J.K. Rowling", rating=9.3)
+#     db.session.add(new_book)
+#     db.session.commit()
 
 
 @app.route('/')
 def home():
+    result = db.session.execute(db.select(Book).order_by(Book.title))
+    all_books= result.scalars()
     return render_template("index.html", books=all_books)
 
 
 @app.route("/add", methods=["GET", "POST"])
 def add():
     if request.method == "POST":
-        new_book = {
+        new_book = Book(
 
-            "title": request.form["title"],
-            "author": request.form["author"],
-            "rating": request.form["rating"],
-        }
-        all_books.append(new_book)
+            title=request.form["title"],
+            author=request.form["author"],
+            rating=request.form["rating"],
+        )
+        db.session.add(new_book)
+        db.session.commit()
         return redirect(url_for('home'))
 
     return render_template("add.html")
