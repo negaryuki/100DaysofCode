@@ -53,7 +53,7 @@ def rate_movie():
 @app.route('/delete')
 def delete_movie():
     movie_id=requests.args.get("id")
-    movie=Movi.query.get(movie_id)
+    movie=Movie.query.get(movie_id)
     db.session.delete(movie)
     db.session.commit()
     return redirect (url_for('home'))
