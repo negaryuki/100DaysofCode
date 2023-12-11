@@ -46,6 +46,14 @@ def rate_movie():
     return render_template ("edit.html", movie =movie, form=form)
 
 
+@app.route('/delete')
+def delete_movie():
+    movie_id=requests.args.get("id")
+    movie=Movi.query.get(movie_id)
+    db.session.delete(movie)
+    db.session.commit()
+    return redirect (url_for('home'))
+
 @app.route("/")
 def home():
     all_movies = Movie.query.all()
