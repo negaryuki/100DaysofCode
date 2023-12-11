@@ -25,8 +25,25 @@ db.create_all()
      review="My favourite character was the caller.",
      img_url="https://image.tmdb.org/t/p/w500/tjrX2oWRCM3Tvarz38zlZM7Uc10.jpg"
  )
- db.session.add(new_movie)
+db.session.add(new_movie)
 db.session.commit()
+
+class RateMovieForm(FlaskForm):
+    rating = StringField("Your Raiting Out of 10")
+    review = StringField("Your Review")
+    submit = SubmitField("Done")
+
+@app.route('/edit')
+def rate_movie():
+    form = RateMovieForm()
+    movie_id = request.args.get(movie_id)
+    movie= Movie.query.get(movie_id)
+    if form.validate_on_submit():
+        movie.rating = float(form.rating.data)
+        movie.review = form.review.data
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template ("edit.html", movie =movie, form=form)
 
 
 @app.route("/")
