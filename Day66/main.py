@@ -55,7 +55,26 @@ def get_cafe_at_location():
     if all_cafes:
         return jsonify(cafes=[cafe.convert_to_dict() for cafe in all_cafes])
     else:
-        return jsonify(error={"Not Found":"Sorry, we don't have any cafes in that area "})
+        return jsonify(error={"Not Found": "Sorry, we don't have any cafes in that area "})
+
+
+@app.route("/add", methods=["POST"])
+def post_new_cafe():
+    new_cafe = Cafe(
+        name=request.form.get("name"),
+        map_url=request.form.get("map_url"),
+        img_url=request.form.get("img_url"),
+        location=request.form.get("loc"),
+        has_sockets=bool(request.form.get("sockets")),
+        has_toilet=bool(request.form.get("toilet")),
+        has_wifi=bool(request.form.get("wifi")),
+        can_take_calls=bool(request.form.get("calls")),
+        seats=request.form.get("seats"),
+        coffee_price=request.form.get("coffee_price"),
+    )
+    db.session.add(new_cafe)
+    db.session.commit()
+    return jsonify(response={"success": "Successfully added the new cafe."})
 
 @app.route("/")
 def home():
