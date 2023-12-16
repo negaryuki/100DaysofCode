@@ -24,9 +24,12 @@ class Cafe(db.Model):
     can_take_calls = db.Column(db.Boolean, nullable=False)
     coffee_price = db.Column(db.String(250), nullable=True)
 
+    def convert_to_dict(self):
+        return {column.name: getattr(self, column.name) for column in self.__table__.columns}
 
-def convert_to_dict(self):
-    return {column.name: getattr(self, column.name) for column in self.__table__.columns}
+
+# with app.create_contect():
+#    db.create_all()
 
 
 @app.route("/random")
@@ -41,12 +44,18 @@ def get_random_cafe():
 def get_all_cafes():
     result = db.session.execute(db.select(Cafe).order_by(Cafe.name))
     all_cafes = result.scalars().all()
-    return jsonify(cafes=[cafe.todict() for cafe in all_cafes])
+    return jsonify(cafes=[cafe.convert_to_dict() for cafe in all_cafes])
 
 
-with app.create_contect():
-    db.create_all()
-
+@app.route("/search")
+def get_cafe_at_location():
+    query_location = request.args.get("loc")
+    result = db.session.execute(db.select(Cafe).where(Cafe.location) == query_location)
+    all_cafes = result.scalars().all()
+    if all_cafes:
+        return jsonify(cafes=[cafe.convert_to_dict() for cafe in all_cafes])
+    else:
+        return jsonify(error={"Not Found":"Sorry, we don't have any cafes in that area "})
 
 @app.route("/")
 def home():
