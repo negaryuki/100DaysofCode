@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request, jsonify
+from flask import Flask, jsonify, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import random
 
@@ -26,7 +26,6 @@ class Cafe(db.Model):
 
 
 def convert_to_dict(self):
-    dictionary = {}
     return {column.name: getattr(self, column.name) for column in self.__table__.columns}
 
 
@@ -35,7 +34,14 @@ def get_random_cafe():
     result = db.session.execute(db.select(Cafe))
     all_cafes = result.scalars().all()
     random_cafe = random.choice(all_cafes)
-    return jsonify()
+    return jsonify(cafe=random_cafe.convert_to_dict())
+
+
+@app.route("/all")
+def get_all_cafes():
+    result = db.session.execute(db.select(Cafe).order_by(Cafe.name))
+    all_cafes = result.scalars().all()
+    return jsonify(cafes=[cafe.todict() for cafe in all_cafes])
 
 
 with app.create_contect():
