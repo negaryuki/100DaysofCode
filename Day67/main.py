@@ -47,17 +47,20 @@ with app.app_context():
 
 @app.route('/')
 def get_all_posts():
-    # TODO: Query the database for all the posts. Convert the data to a python list.
-    posts = []
+    result = db.session.execute(db.select(BlogPost))
+    posts = result.scalar().all()
     return render_template("index.html", all_posts=posts)
 
-# TODO: Add a route so that you can click on individual posts.
+
 @app.route('/')
 def show_post(post_id):
-    # TODO: Retrieve a BlogPost from the database based on the post_id
-    requested_post = "Grab the post from your database"
+    requested_post = db.get_or_404(BlogPost, post_id)
     return render_template("post.html", post=requested_post)
 
+
+@app.route('\contact')
+def contact():
+    render_template("contact.html")
 
 # TODO: add_new_post() to create a new blog post
 
@@ -65,7 +68,7 @@ def show_post(post_id):
 
 # TODO: delete_post() to remove a blog post from the database
 
-# Below is the code from previous lessons. No changes needed.
+
 @app.route("/about")
 def about():
     return render_template("about.html")
