@@ -7,19 +7,6 @@ from wtforms.validators import DataRequired, URL
 from flask_ckeditor import CKEditor, CKEditorField
 from datetime import date
 
-'''
-Make sure the required packages are installed: 
-Open the Terminal in PyCharm (bottom left). 
-
-On Windows type:
-python -m pip install -r requirements.txt
-
-On MacOS type:
-pip3 install -r requirements.txt
-
-This will install the packages from the requirements.txt for this project.
-'''
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 Bootstrap5(app)
@@ -52,7 +39,7 @@ def get_all_posts():
     return render_template("index.html", all_posts=posts)
 
 
-@app.route('/')
+@app.route("/post/<int:post_id>")
 def show_post(post_id):
     requested_post = db.get_or_404(BlogPost, post_id)
     return render_template("post.html", post=requested_post)
@@ -61,12 +48,6 @@ def show_post(post_id):
 @app.route('\contact')
 def contact():
     render_template("contact.html")
-
-# TODO: add_new_post() to create a new blog post
-
-# TODO: edit_post() to change an existing blog post
-
-# TODO: delete_post() to remove a blog post from the database
 
 
 @app.route("/about")
