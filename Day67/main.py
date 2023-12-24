@@ -66,7 +66,7 @@ def contact():
 
 # TODO: edit_post() to change an existing blog post
 
-# TODO: delete_post() to remove a blog post from the database
+# TODO: delete_post() to remove a blog post from thedatabase
 
 
 @app.route("/about")
