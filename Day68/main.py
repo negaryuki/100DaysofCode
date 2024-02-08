@@ -43,50 +43,46 @@ def register():
         email = request.form.get('email')
         result = db.session.execute(db.select(User).where(User.email == email))
         user = result.scalar()
-
         if user:
-            flash(" this email address already exists, try logging in instead")
+            flash("You've already signed up with that email, log in instead!")
             return redirect(url_for('login'))
-
         hash_and_salted_password = generate_password_hash(
             request.form.get('password'),
             method='pbkdf2:sha256',
             salt_length=8
         )
-
         new_user = User(
             email=request.form.get('email'),
+            password=hash_and_salted_password,
             name=request.form.get('name'),
-            password=hash_and_salted_password
         )
-
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user)
-        return render_template("secrets.html")
-    return render_template("register.html")
+        return redirect(url_for("secrets"))
+    # Passing True or False if the user is authenticated.
+    return render_template("register.html", logged_in=current_user.is_authenticated)
 
 
-@app.route('/login',methods=["GET", "POST"])
+@app.route('/login', methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         email = request.form.get('email')
         password = request.form.get('password')
-
-        # Find user by email entered.
         result = db.session.execute(db.select(User).where(User.email == email))
         user = result.scalar()
-
         if not user:
-            flash("This email does not exist, please try again.")
+            flash("That email does not exist, please try again.")
             return redirect(url_for('login'))
         elif not check_password_hash(user.password, password):
-            flash('Incorrect Password, please try again.')
+            flash('Password incorrect, please try again.')
             return redirect(url_for('login'))
         else:
             login_user(user)
             return redirect(url_for('secrets'))
-    return render_template("login.html")
+    # Passing True or False if the user is authenticated.
+    return render_template("login.html", logged_in=current_user.is_authenticated)
+
 
 @app.route('/secrets')
 @login_required
