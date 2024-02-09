@@ -39,7 +39,7 @@ class BlogPost(db.Model):
 # TODO: Create a User table for all your registered users. 
 class User(UserMixin, db.Model):
     __tablename__ = "users"
-    id = db.Columm(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     name = db.Column(db.String(100))
@@ -50,13 +50,13 @@ with app.app_context():
 
 
 # TODO: Use Werkzeug to hash the user's password when creating a new user.
-@app.route('/register',methods=["GET", "POST"])
+@app.route('/register', methods=["GET", "POST"])
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
         hash_and_salted_password = generate_password_hash(
-         form.password.data,
-            method= 'pbkdf2:sha256',
+            form.password.data,
+            method='pbkdf2:sha256',
             salt_length=8
         )
         new_user = User(
@@ -67,8 +67,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for("get_all_posts"))
-    return render_template("register.html",form=form)
-
+    return render_template("register.html", form=form)
 
 # TODO: Retrieve a user from the database based on their email. 
 @app.route('/login')
