@@ -87,7 +87,22 @@ print(reshaped_df.isna().values.any())
 # .ylabel() - add text to the y-axis
 # .ylim() - allows us to set a lower and upper bound
 
+roll_df = reshaped_df.rolling(window=6).mean()
+
+roll_df = reshaped_df.rolling(window=6).mean()
+
 plt.figure(figsize=(16,10))
 plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
-plt.plot(reshaped_df.index, reshaped_df.java)
+plt.xlabel('Date', fontsize=14)
+plt.ylabel('Number of Posts', fontsize=14)
+plt.ylim(0, 35000)
+
+
+for column in roll_df.columns:
+    plt.plot(roll_df.index, roll_df[column],
+             linewidth=3, label=roll_df[column].name)
+
+plt.legend(fontsize=16)
+
+plt.show()
