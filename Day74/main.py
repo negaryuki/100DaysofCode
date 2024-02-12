@@ -53,6 +53,14 @@ ax1.set_xlabel('Year')
 ax1.set_ylabel('Number of Sets', color='green')
 ax2.set_ylabel('Number of Themes', color = 'blue')
 
+print(mark)
+
+parts_per_set = sets.groupby('year').agg({'num_parts': pd.Series.mean})
+
+plt.scatter(parts_per_set.index[:-2], parts_per_set.num_parts[:-2])
+   
+print(mark)
+  
 
 
              
