@@ -1,4 +1,4 @@
-import pandas as pd
+..import pandas as pd
 
 mark = '--------------------'
 
@@ -61,6 +61,36 @@ plt.scatter(parts_per_set.index[:-2], parts_per_set.num_parts[:-2])
    
 print(mark)
   
+set_theme_count = sets["theme_id"].value_counts()
+print(set_theme_count[:5]
+
+
+print(mark)
+
+themes = pd.read('data/themes.csv')
+print(themes.head())
+
+
+star_wars_themes = themes[themes.name == 'Star Wars']
+
+star_wars_sets = sets[sets.theme_id ==18]
+star_wars_sets = sets[sets.theme_id ==209]
+
+
+set_theme_count = pd.DataFrame({'id': set_theme_count.index,
+                                'set_count': set_theme_count.values})
+                                
+merged_df = pd.merge(set_theme_count,themes, on= 'id')
+merged_df[:3]
+
+print(mark)
+
+plt.figure(figsize=(14,8))
+plt.xticks(fontsize=14,rotation=45)
+plt.yticks(fontsize=14)
+plt.ylabel('Nr. of Sets', fontsize=14)
+plt.xlabel('Theme name', fontsize=14)
+plt.bar(merged_df.name[:10], merged_df.set_count
 
 
              
