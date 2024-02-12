@@ -30,15 +30,4 @@ print(mark)
 most_parts =sets.sort_values('num_parts', ascending=False).head()
 print(most_parts)
 
-mark = '--------------------'
-
-theme_by_year = sets.groupby('year').agg({'theme_id': pd.Series.unique})
-theme_by_year.rename(columns={'theme_id':'nr_themes'}, inplace = True)
-
-print(theme_by_year.head())
-print(theme_by_year.tail())
-
-mark = '--------------------'
-
-plt.plot(theme_by_year.index[:-2], theme_by_year.nr_themes[:-2])
 
