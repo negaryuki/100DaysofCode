@@ -38,3 +38,32 @@ print (f'largest BIC News Search (df _bto_search. BIC NEWS_SEARCH.max ())')
 
 
 # -------------------Cleaning Data-------------------
+
+print(f'Missing values for Tesla? {df_teslaisna().values().any()}')
+print(f'Missing values for Unemployment? {df_unemployment.isna().values().any()}')
+print(f'Missing values for Tesla? {df_btc_search.isna().values().any()}')
+
+print(f'Missing values for Tesla? {df_btc_search.isna().values().sum()}')
+df_btc_price[df_btc_price.ClOSE.isna()]
+
+df_btc_price = df_btc_price.dropna()
+
+# Remove any Missing values:
+  
+df_btc_price = df_btc_price.dropna(inplace=True)
+
+# Change Datetime type:
+  
+type(df_tesla.MONTH[0])
+
+df_tesla.MONTH = pd.to_datetime(df_tesla.MONTH)
+df_btc_search.MONTH = pd.to_datetime(df_btc_search.MONTH)
+df_unemployment.MONTH = pd.to_datetime(df_unemployment.MONTH)
+df_btc_price.DATE = pd.to_datetime(df_btc_price.DATE)
+
+# Converting Data:
+  
+df_btc_monthly = df_btc_price.resample('M',on='DATE').last()
+
+print(df_btc_monthly.shape)
+df_btc_monthly.head( )
