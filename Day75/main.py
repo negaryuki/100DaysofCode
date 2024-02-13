@@ -1,5 +1,6 @@
 import pandas as pd
-
+from pandas.plotting import register_matplotlibconverters
+register_matplotlib_converters( )
 
 df_tesla = pd.read_csv('tesla.csv')
 df_unemployment = pd.read_csv('unemployment.csv')
@@ -67,3 +68,23 @@ df_btc_monthly = df_btc_price.resample('M',on='DATE').last()
 
 print(df_btc_monthly.shape)
 df_btc_monthly.head( )
+
+#----------------Visualization--------------------
+
+# size and resolution
+plt.figure(figsize=(14,8), dpi=120) 
+plt.title('Tesla Web Search vs Price', fontsize=18)
+
+ax1 = plt.gca()
+ax2 = ax1.twinx()
+
+# fontsize and linewidth for larger charts
+ax1.set_ylabel('TSLA Stock Price', color='#E6232E', fontsize=14)
+ax2.set_ylabel('Search Trend', color='skyblue', fontsize=14)
+
+ax1.plot(df_tesla.MONTH, df_tesla.TSLA_USD_CLOSE, color='#E6232E', linewidth=3)
+ax2.plot(df_tesla.MONTH, df_tesla.TSLA_WEB_SEARCH, color='skyblue', linewidth=3)
+
+# Displays chart
+plt.show()
+
