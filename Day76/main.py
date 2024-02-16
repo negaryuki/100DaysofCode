@@ -112,3 +112,103 @@ h_bar = px.bar(x = category_installs.Installs,
 
 h_bar.update_layout(xaxis_title='Number of Downloads', yaxis_title='Category')
 h_bar.show()
+
+# ------------------
+cat_number = df_apps_clean.groupby('Category').agg({'App': pd.Series.count})
+
+cat_merged_df = pd.merge(cat_number, category_installs, on='Category', how="inner")
+print(f'The dimensions of the DataFrame are: {cat_merged_df.shape}')
+cat_merged_df.sort_values('Installs', ascending=False)
+
+scatter = px.scatter(cat_merged_df, # data
+                    x='App', # column name
+                    y='Installs',
+                    title='Category Concentration',
+                    size='App',
+                    hover_name=cat_merged_df.index,
+                    color='Installs')
+
+scatter.update_layout(xaxis_title="Number of Apps (Lower=More Concentrated)",
+                      yaxis_title="Installs",
+                      yaxis=dict(type='log'))
+
+scatter.show()
+
+# -----------
+stack = df_apps_clean.Genres.str.split(';', expand=True).stack()
+print(f'We now have a single column with shape: {stack.shape}')
+num_genres = stack.value_counts()
+print(f'Number of genres: {len(num_genres)}')
+
+bar = px.bar(x = num_genres.index[:15], # index = category name
+             y = num_genres.values[:15], # count
+             title='Top Genres',
+             hover_name=num_genres.index[:15],
+             color=num_genres.values[:15],
+             color_continuous_scale='Agsunset')
+
+bar.update_layout(xaxis_title='Genre',
+yaxis_title='Number of Apps',
+coloraxis_showscale=False)
+
+bar.show()
+
+df_apps_clean.Type.value_counts()
+
+df_free_vs_paid = df_apps_clean.groupby(["Category", "Type"], as_index=False).agg({'App': pd.Series.count})
+df_free_vs_paid.head()
+
+g_bar = px.bar(df_free_vs_paid,
+               x='Category',
+               y='App',
+               title='Free vs Paid Apps by Category',
+               color='Type',
+               barmode='group')
+
+g_bar.update_layout(xaxis_title='Category',
+                    yaxis_title='Number of Apps',
+                    xaxis={'categoryorder':'total descending'},
+                    yaxis=dict(type='log'))
+
+g_bar.show()
+
+box = px.box(df_apps_clean,
+             y='Installs',
+             x='Type',
+             color='Type',
+             notched=True,
+             points='all',
+             title='How Many Downloads are Paid Apps Giving Up?')
+
+box.update_layout(yaxis=dict(type='log'))
+
+box.show()
+
+#----------
+df_paid_apps = df_apps_clean[df_apps_clean['Type'] == 'Paid']
+box = px.box(df_paid_apps,
+             x='Category',
+             y='Revenue_Estimate',
+             title='How Much Can Paid Apps Earn?')
+
+box.update_layout(xaxis_title='Category',
+                  yaxis_title='Paid App Ballpark Revenue',
+                  xaxis={'categoryorder':'min ascending'},
+                  yaxis=dict(type='log'))
+
+
+box.show()
+#--------------
+
+box = px.box(df_paid_apps,
+             x='Category',
+             y="Price",
+             title='Price per Category')
+
+box.update_layout(xaxis_title='Category',
+                  yaxis_title='Paid App Price',
+                  xaxis={'categoryorder':'max descending'},
+                  yaxis=dict(type='log'))
+
+box.show()
+
