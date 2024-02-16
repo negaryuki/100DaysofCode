@@ -32,7 +32,7 @@ print(duplicated_rows.shape)
 print(duplicated_rows.head())
 
 df_apps_clean = df_apps_clean.drop_duplicates(subset= ['App', 'Type', 'Price'])
-df_apps_clean[df apps_clean.App =='Instagram'] 
+df_apps_clean[dfـapps_clean.App =='Instagram']
 
 df_apps_clean.shape
 
@@ -77,3 +77,13 @@ df_apps_clean.Installs = df_apps_clean.Installs.astype(str).str.replace(',',"")
 df_apps_clean.Installs = pd.to_numeric(df_apps_clean.Installs)
 df_apps_clean[['App', 'Installs']].groupby('Installs').count()
   
+df_apps_clean.Price.describe()
+df_apps_clean.Price = df_apps_clean.Price.astype(str).str.replace('$', "")
+df_apps_clean.Price = pd.to_numeric(df_apps_clean.Price)
+
+df_apps_clean.sort_values('Price', ascending=False).head(20)
+
+df_apps_clean = df_apps_clean[df_apps_clean['Price'] < 250]
+df_apps_clean.sort_values('Price', ascending=False).head(5)
+df_apps_clean['Revenue_Estimate'] = df_apps_clean.Installs.mul(df_apps_clean.Price)
+df_apps_clean.sort_values('Revenue_Estimate', ascending=False)[:10]
