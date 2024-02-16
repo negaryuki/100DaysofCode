@@ -87,3 +87,28 @@ df_apps_clean = df_apps_clean[df_apps_clean['Price'] < 250]
 df_apps_clean.sort_values('Price', ascending=False).head(5)
 df_apps_clean['Revenue_Estimate'] = df_apps_clean.Installs.mul(df_apps_clean.Price)
 df_apps_clean.sort_values('Revenue_Estimate', ascending=False)[:10]
+
+df_apps_clean.Category.nunique()
+top10_category = df_apps_clean.Category.value_counts()[:10]
+
+bar = px.bar(x = top10_category.index, # index = category name
+             y = top10_category.values)
+
+bar.show()
+
+category_installs = df_apps_clean.groupby('Category').agg({'Installs': pd.Series.sum})
+category_installs.sort_values('Installs', ascending=True, inplace=True)
+
+h_bar = px.bar(x = category_installs.Installs,
+               y = category_installs.index,
+               orientation='h')
+
+h_bar.show()
+
+h_bar = px.bar(x = category_installs.Installs,
+               y = category_installs.index,
+               orientation='h',
+               title='Category Popularity')
+
+h_bar.update_layout(xaxis_title='Number of Downloads', yaxis_title='Category')
+h_bar.show()
