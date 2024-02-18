@@ -120,3 +120,39 @@ plt.show()
 noise = np.random.random((128,128,3))
 print(noise.shape)
 plt.imshow(noise)
+
+print('----------------------------------------')
+# Multiply matrx
+
+с =пр•matmul (al, b1)
+print(f'Matrix c has {c.shape[0]} rows and {c.shape[1]} columns.')
+
+print('----------------------------------------')
+img = misc.face()
+plt.imshow(img)
+
+print(type(img))
+print(numpy.ndarray)
+print(img.shape)
+print(img.ndim)
+
+# Make the Picture black and white
+sRGB_array = img / 255
+
+gray_vals = np.array([0.2126, 0.7152, 0.0722])
+img_gray = sRGB_array @ gray_vals
+plt.imshow(img_gray,cmap='gray')
+
+# flip image 
+
+plt.imshow(np.flip(img_gray),cmap='gray')
+
+# rotate image
+
+plt.imshow(np.rot90(img))
+
+solar_img = 255 - img
+
+plt.imshow(solar_img)
+
+
