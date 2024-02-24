@@ -73,3 +73,11 @@ money_losing.shape[0]/data_clean.shape[0]
 sns.scatterplot(data=data_clean,
                 x='USD_Production_Budget',
                 y='USD_Worldwide_Gross')
+
+plt.figure(figsize=(8,4), dpi=200)
+sns.scatterplot (data=data_clean,
+x='USD_Production_Budget',
+y='USD Worldwide Gross')
+
+plt.show()
+
