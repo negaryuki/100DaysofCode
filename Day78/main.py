@@ -1,6 +1,10 @@
-data = pd.read_csv('data.csv')
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+data = pd.read_csv('cost_revenue_dirty.csv')
 shapes = data.shape
-print(shape)
+print(shapes)
 
 print(data.head())
 print(data.tail())
@@ -53,6 +57,19 @@ international_releases = data.loc[(data.USD_Domestic_Gross == 0) &
 
 international_releases = data.query('USD_Domestic_Gross == 0 and USD_Worldwide_Gross != 0')
 print(f'Number of international releases: {len(international_releases)}')
-international_releases.tail()
+international_releases
+
+scrape_date = pd.Timestamp('2018-5-1')
+
+future_releases = data [data.Release_Date >= scrape_date]
+print (f'Number of unreleased movies: {len (future_releases) }')
 
 
+data_clean = data.drop(future_releases.index)
+
+money_losing = data_clean.query('USD_Production_Budget > USD_Worldwide_Gross')
+money_losing.shape[0]/data_clean.shape[0]
+
+sns.scatterplot(data=data_clean,
+                x='USD_Production_Budget',
+                y='USD_Worldwide_Gross')
