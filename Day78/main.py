@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.linear model import LinearRegression
 
 data = pd.read_csv('cost_revenue_dirty.csv')
 shapes = data.shape
@@ -81,3 +82,66 @@ y='USD Worldwide Gross')
 
 plt.show()
 
+plt.figure(figsize=(8,4), dpi=200)
+
+with sns.axes_style("darkgrid"):
+    ax = sns.scatterplot(data=data_clean,
+                    x='Release_Date',
+                    y='USD_Production_Budget',
+                    hue='USD_Worldwide_Gross',
+                    size='USD_Worldwide_Gross',)
+
+    ax.set(ylim=(0, 450000000),
+           xlim=(data_clean.Release_Date.min(), data_clean.Release_Date.max()),
+           xlabel='Year',
+           ylabel='Budget in $100 millions')
+
+dt_index = pd.DatetimeIndex(data_clean.Release_Date)
+years = dt_index.year
+
+decades = years//10*10
+data_clean['Decade'] = decades
+
+old_films = data_clean[data_clean.Decade <= 1960]
+new_films = data_clean[data_clean.Decade > 1960]
+
+old_films.describe()
+
+old_films.sort_values('USD Production Budget', ascending=False).head()
+
+sns.regplot(data=old_films,
+            x='USD_Production_Budget',
+            y='USD_Worldwide_Gross')
+
+plt.figure(figsize=(8,4), dpi=200)
+with sns.axes_style("whitegrid"):
+  sns.regplot(data=old_films,
+            x='USD_Production_Budget',
+            y='USD_Worldwide_Gross',
+            scatter_kws = {'alpha': 0.4},
+            line_kws = {'color': 'black'})
+
+plt.figure(figsize=(8, 4), dpi=200)
+with sns.axes_style('darkgrid'):
+    ax = sns.regplot(data=new_films,
+                     x='USD_Production_Budget',
+                     y='USD_Worldwide_Gross',
+                     color='#2f4b7c',
+                     scatter_kws={'alpha': 0.3},
+                     line_kws={'color': '#ff7c43'})
+
+    ax.set(ylim=(0, 3000000000),
+           xlim=(0, 450000000),
+           ylabel='Revenue in $ billions',
+           xlabel='Budget in $100 millions')
+
+regression = LinearRegression()
+
+# Explanatory Variable(s) or Feature(s)
+X = pd.DataFrame(new_films, columns=['USD_Production_Budget'])
+
+# Response Variable or Target
+y = pd.DataFrame(new_films,columns=['USD_Worldwide_Gross'])
+
+# Find the best-fit line
+regression.fit(X, y)
