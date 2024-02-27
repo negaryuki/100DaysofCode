@@ -1,7 +1,7 @@
-import pandas as pd
+import LinearRegression
 import matplotlib.pyplot as plt
+import pandas as pd
 import seaborn as sns
-from sklearn.linear model import LinearRegression
 
 data = pd.read_csv('cost_revenue_dirty.csv')
 shapes = data.shape
