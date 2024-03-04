@@ -46,3 +46,14 @@ class TypingTestTimeApp:
         self.restart_btn.pack()
         self.restart_btn.pack_forget()   # Hide Restart Button
 
+    def start_typing_test(self):
+        self.start_btn.pack_forget()
+        self.time_start = time.time()    # Record current time
+
+        # This line binds the <KeyRelease> event to the check_typing_speed method.
+        # This means that every time a key is released (i.e., a key is typed) in the txt_input text widget,
+        # the check_typing_speed method will be called to check the typing speed.
+        self.text_input.bind("<KeyRelease>", self.check_typing_speed)
+
+    def check_typing_speed(self, event):
+
