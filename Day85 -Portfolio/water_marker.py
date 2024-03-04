@@ -73,11 +73,21 @@ browse_button = tk.Button(window,
                           text="Browse Image",
                           command=browse_image)
 
+# show button
+browse_button.pack(pady=20)
+
+
+# Create a text to define watermark text
+#text_t = tk.Text(window)
+#text_button = tk.Button(text="Submit",
+#                        command=add_text_watermark)
+#text_t.pack()
+#text_button.pack()
+
+
 save_button = tk.Button(window, text="Save Image", command=lambda: save_image(watermarked_img))
 save_button.pack(pady=10)
 
-# show button
-browse_button.pack(pady=20)
 
 # Start the Tkinter event loop
 window.mainloop()
