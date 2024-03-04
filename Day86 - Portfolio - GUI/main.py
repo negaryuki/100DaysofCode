@@ -56,4 +56,12 @@ class TypingTestTimeApp:
         self.text_input.bind("<KeyRelease>", self.check_typing_speed)
 
     def check_typing_speed(self, event):
+        if self.text_input.get("1.0", "end-1c") == self.current_text:
+            self.time_end = time.time()
+            time_taken = self.time_end - self.time_start
+            words_per_minute = int((self.total_words/time_taken)* 60)
+            self.result_label.config(text=f"Your Typing speed is {words_per_minute} words per minute.")
+            self.text_input.unbind("<KeyRelease>")
+            self.restart_btn.pack()
+
 
