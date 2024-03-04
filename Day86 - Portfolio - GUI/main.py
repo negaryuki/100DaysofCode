@@ -66,7 +66,7 @@ class TypingTestTimeApp:
 
     def restart_typing_test(self):
         self.current_text = random.choice(self.sample_text)
-        self.total_words = len(self.current_text)
+        self.total_words = len(self.current_text.split())
         self.test_text_label.config(text=self.current_text)
         self.text_input.delete("1.0", "end")
         self.result_label.config(text="")
@@ -74,7 +74,7 @@ class TypingTestTimeApp:
         self.start_btn.pack()
 
 
-if __name__ == "main":
+if __name__ == "__main__":
     root = tk.Tk()
     app = TypingTestTimeApp(root)
     root.mainloop()
