@@ -52,3 +52,27 @@ score_display.goto(0,260)
 score_display.write("Score: {}".format(score).align="center", font=("Courier",24,"normal"))
 
 # ----------- Functions ----------------
+
+# Function to move Paddle Left
+
+def move_left():
+  x= paddle.xcore().  #retrive current x coordinate of paddle
+  
+  if x <240:
+    x -=20
+    paddle.setx(x)
+    
+# Function to move Paddle Right
+
+def move_right():
+  x=paddle.xcor()
+  
+  if x> 240:
+    x += 20
+    paddle.setx(x)
+    
+# ----------- Keyboard Binding ----------------
+
+screen.listen(0)
+screen.onkeypress(move_left, "Left")
+screen.onkeypress(move_right, "Right")
