@@ -13,12 +13,12 @@ def display_image(url, width, height):
     return img_label
 
 
-
 class TypingTestTimeApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Typing Speed Tester")
         self.root.geometry("400x700")
+        self.root.config(bg="white")
 
         self.high_score = 0
         self.current_score = 0
@@ -35,37 +35,37 @@ class TypingTestTimeApp:
         self.time_end = 0
         self.total_words = len(self.current_text.split())
 
-
         # Place Logo
-        self.logo = display_image("assets/logo.png",400,150)
-        self.logo.grid(column= 0,row=0, sticky=tk.N+tk.S)
+        self.logo = display_image("assets/logo.png", 400, 150)
+        self.logo.grid(column=0, row=0, sticky=tk.N + tk.S)
 
         # Place PC Logo
-        self.logo = display_image("assets/PC.jpeg",400, height= 300)
-        self.logo.grid(column= 0,row=1, sticky=tk.N+tk.S)
-
+        self.logo = display_image("assets/PC.jpeg", 400, height=300)
+        self.logo.grid(column=0, row=1, sticky=tk.N + tk.S)
 
         # Instruction Label
-        self.instruction_label = tk.Label(self.root, text="Type the Following Text as fast as you can:")
-        self.instruction_label.grid()
+        self.instruction_label = tk.Label(self.root, text="Type the Following Text as fast as you can:", bg="white",
+                                          fg="black",
+                                          font=("Helvetica", 16, "bold"))
+        self.instruction_label.grid(column=0,row=2)
 
         # Test Sentence
-        self.test_text_label = tk.Label(self.root, text=self.current_text, wraplength=380)
-        self.test_text_label.grid()
+        self.test_text_label = tk.Label(self.root, text=self.current_text, wraplength=380, bg="white", fg="black",
+                                        font=("Helvetica", 17))
+        self.test_text_label.grid(column=0,row=3)
 
         # Text Box
-        self.text_input = tk.Text(self.root, height=5, width=50)
-        self.text_input.grid()
+        self.text_input = tk.Text(self.root, height=5, width=50, bd=3, relief="solid", bg="white")
+        self.text_input.grid(column=0,row=4, pady=10)
 
         # Button
-        self.start_btn = tk.Button(self.root, text="Start", command=self.start_typing_test, bg="#FF5757", fg="white",
-                                   font=("Helvetica", 12, "bold"))
-
-        self.start_btn.grid()
+        self.start_btn = tk.Button(self.root, text="Start", command=self.start_typing_test, fg="black",bg="white",
+                                   font=("Helvetica", 15, "bold"))
+        self.start_btn.grid(column=0,row=5)
 
         # Result Label
-        self.result_label = tk.Label(self.root, text="")
-        self.result_label.grid()
+        self.result_label = tk.Label(self.root, text="", bg="white")
+        self.result_label.grid(column=0,row=5)
 
         # Restart Button
         self.restart_btn = tk.Button(self.root, text="Restart", command=self.restart_typing_test)
