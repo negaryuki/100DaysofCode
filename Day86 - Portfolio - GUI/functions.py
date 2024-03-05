@@ -99,7 +99,8 @@ class TypingTestTimeApp:
             if self.recent_score > self.high_score:
                 self.high_score = self.recent_score
 
-            self.result_label.config(text=f"Your Typing speed is {words_per_minute} words per minute.")
+            self.result_label.config(text=f"Your Typing speed is {self.recent_score} words per minute.", fg="black")
+            self.high_score_label.config(text=f'Highscore {self.high_score}')
             self.text_input.unbind("<KeyRelease>")
             self.restart_btn.grid()
 
