@@ -1,28 +1,25 @@
 import tkinter as tk
 import random
 import time
+from PIL import Image, ImageTk
 
 
-from PIL import ImageTk
-
-
-def display_image(url, column, row):
-  img = Image.open(url)
-  img = ImageTk.PhotoImage(img)
-  img_label = Label(image=img)
-  img_label.img = img
-  img.grid(column=column,row=row)
-
-
+def display_image(url, width, height):
+    img = Image.open(url)
+    img = img.resize((width, height))
+    photo = ImageTk.PhotoImage(img)
+    img_label = tk.Label(image=photo)
+    img_label.image = photo  # Store a reference to prevent image from being garbage collected
+    return img_label
 
 
 
 class TypingTestTimeApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Typing Speed Test")
-        self.root.geometry("400x300")
-        
+        self.root.title("Typing Speed Tester")
+        self.root.geometry("400x700")
+
         self.high_score = 0
         self.current_score = 0
 
@@ -38,43 +35,53 @@ class TypingTestTimeApp:
         self.time_end = 0
         self.total_words = len(self.current_text.split())
 
+
+        # Place Logo
+        self.logo = display_image("assets/logo.png",400,150)
+        self.logo.grid(column= 0,row=0, sticky=tk.N+tk.S)
+
+        # Place PC Logo
+        self.logo = display_image("assets/PC.jpeg",400, height= 300)
+        self.logo.grid(column= 0,row=1, sticky=tk.N+tk.S)
+
+
         # Instruction Label
         self.instruction_label = tk.Label(self.root, text="Type the Following Text as fast as you can:")
-        self.instruction_label.pack()
+        self.instruction_label.grid()
 
         # Test Sentence
         self.test_text_label = tk.Label(self.root, text=self.current_text, wraplength=380)
-        self.test_text_label.pack()
+        self.test_text_label.grid()
 
         # Text Box
         self.text_input = tk.Text(self.root, height=5, width=50)
-        self.text_input.pack()
+        self.text_input.grid()
 
         # Button
-        self.start_btn = tk.Button(self.root, text="Start", command=self.start_typing_test, bg="#FF5757", fg="white", font=("Helvetica", 12, "bold"))
-        
-        self.start_btn.pack()
+        self.start_btn = tk.Button(self.root, text="Start", command=self.start_typing_test, bg="#FF5757", fg="white",
+                                   font=("Helvetica", 12, "bold"))
+
+        self.start_btn.grid()
 
         # Result Label
         self.result_label = tk.Label(self.root, text="")
-        self.result_label.pack()
+        self.result_label.grid()
 
         # Restart Button
         self.restart_btn = tk.Button(self.root, text="Restart", command=self.restart_typing_test)
-        self.restart_btn.pack()
-        self.restart_btn.pack_forget()  # Hide Restart Button
-        
+        self.restart_btn.grid()
+        self.restart_btn.grid_forget()  # Hide Restart Button
+
         # Highscore Label
-        self.high_score_label = tk.Label(self.root, text= f'Highscore {self.high_score}')
-        self.high_score_label.pack()
-        
-        
+        self.high_score_label = tk.Label(self.root, text=f'Highscore {self.high_score}')
+        self.high_score_label.grid()
+
         # Recent Score Label
-        self.recent_score_label = tk.Label(self.root, txt="")
-        self.recent_score_label.pack()
+        self.recent_score_label = tk.Label(self.root, text="")
+        self.recent_score_label.grid()
 
     def start_typing_test(self):
-        self.start_btn.pack_forget()
+        self.start_btn.grid_forget()
         self.time_start = time.time()  # Record current time
 
         # This line binds the <KeyRelease> event to the check_typing_speed method.
@@ -88,13 +95,13 @@ class TypingTestTimeApp:
             time_taken = self.time_end - self.time_start
             words_per_minute = int((self.total_words / time_taken) * 60)
             self.recent_score = words_per_minute
-            
+
             if self.recent_score > self.high_score:
-              self.high_score = self.recent_score
-              
+                self.high_score = self.recent_score
+
             self.result_label.config(text=f"Your Typing speed is {words_per_minute} words per minute.")
             self.text_input.unbind("<KeyRelease>")
-            self.restart_btn.pack()
+            self.restart_btn.grid()
 
     def restart_typing_test(self):
         self.current_text = random.choice(self.sample_text)
@@ -102,11 +109,11 @@ class TypingTestTimeApp:
         self.test_text_label.config(text=self.current_text)
         self.text_input.delete("1.0", "end")
         self.result_label.config(text="")
-        self.restart_btn.pack_forget()
-        self.start_btn.pack()
+        self.restart_btn.grid_forget()
+        self.start_btn.grid()
 
 
 if __name__ == "__main__":
     root = tk.Tk()
     app = TypingTestTimeApp(root)
-    root.mainloop() 
+    root.mainloop()
