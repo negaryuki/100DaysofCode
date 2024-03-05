@@ -55,7 +55,7 @@ class TypingTestTimeApp:
         self.test_text_label.grid(column=0,row=3)
 
         # Text Box
-        self.text_input = tk.Text(self.root, height=5, width=50, bd=3, relief="solid", bg="white")
+        self.text_input = tk.Text(self.root, height=5, width=50, bd=3, relief="solid", bg="white",fg="black")
         self.text_input.grid(column=0,row=4, pady=10)
 
         # Button
