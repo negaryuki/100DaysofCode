@@ -44,7 +44,7 @@ for i in range(5):
 
 score = 0
 score_display = turtle.Turtle()
-score_display.speed(0).  # the turtle will update without any animation 
+score_display.speed(0)  # the turtle will update without any animation
 score_display.color("white")
 score.display.penup()
 score_display.hideturtle(). # hide turtle cursor

@@ -18,7 +18,7 @@ class TypingTestTimeApp:
         self.root = root
         self.root.title("Typing Speed Tester")
         self.root.geometry("400x700")
-        self.root.config(bg="white")
+        self.root.config()
 
         self.high_score = 0
         self.current_score = 0
@@ -35,24 +35,36 @@ class TypingTestTimeApp:
         self.time_end = 0
         self.total_words = len(self.current_text.split())
 
+        # Load BG image
+        self.bg = Image.open("assets/bg.jpg")
+        self.bg_photo = ImageTk.PhotoImage(self.bg)
+
+        # Create a Canvas widget
+        self.canvas = tk.Canvas(self.root)
+        self.canvas.grid(row=0,column=0)
+
+        # Add background image to the canvas
+        self.canvas.create_image(0, 0, image=self.bg_photo)
+        self.canvas.image = self.bg_photo
+
         # Place Logo
         self.logo = display_image("assets/logo.png", 400, 150)
         self.logo.grid(column=0, row=0, sticky=tk.N + tk.S)
 
         # Place PC Logo
-        self.logo = display_image("assets/PC.jpeg", 400, height=300)
+        self.logo = display_image("assets/PC.PNG", 400, height=300)
         self.logo.grid(column=0, row=1, sticky=tk.N + tk.S)
 
         # Instruction Label
-        self.instruction_label = tk.Label(self.root, text="Type the Following Text as fast as you can:", bg="white",
+        self.instruction_label = tk.Label(self.root, text="Type the Following Text as fast as you can:",
                                           fg="black",
                                           font=("Helvetica", 16, "bold"))
-        self.instruction_label.grid(column=0,row=2)
+        self.instruction_label.grid(column=0,row=0, rowspan=2,pady=(0, 10))
 
         # Test Sentence
-        self.test_text_label = tk.Label(self.root, text=self.current_text, wraplength=380, bg="white", fg="black",
+        self.test_text_label = tk.Label(self.root, text=self.current_text, wraplength=300, fg="black",
                                         font=("Helvetica", 17))
-        self.test_text_label.grid(column=0,row=3)
+        self.test_text_label.grid(column=0,row=1, pady=(0, 20))
 
         # Text Box
         self.text_input = tk.Text(self.root, height=5, width=50, bd=3, relief="solid", bg="white",fg="black")
