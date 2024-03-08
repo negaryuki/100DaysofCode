@@ -1,14 +1,15 @@
 import tkinter as tk
+from tkinter import *
 import random
 import time
 from PIL import Image, ImageTk
 
 
-def display_image(url, width, height):
+def display_image(frame,url, width, height):
     img = Image.open(url)
     img = img.resize((width, height))
     photo = ImageTk.PhotoImage(img)
-    img_label = tk.Label(image=photo)
+    img_label = tk.Label(frame,image=photo)
     img_label.image = photo  # Store a reference to prevent image from being garbage collected
     return img_label
 
@@ -35,61 +36,65 @@ class TypingTestTimeApp:
         self.time_end = 0
         self.total_words = len(self.current_text.split())
 
+        # Create Frame:
+        self.bg_frame = tk.Frame(self.root)
+        self.bg_frame.columnconfigure(0,weight=1,)
+        self.bg_frame.pack(fill="x")
+
+        self.widget_frame = tk.Frame(self.root)
+        self.widget_frame.pack()
+        self.widget_frame.columnconfigure(1, weight=1)
+
+
+
         # Load BG image
-        self.bg = Image.open("assets/bg.jpg")
-        self.bg_photo = ImageTk.PhotoImage(self.bg)
+        self.bg = display_image(self.bg_frame,"assets/bg.jpg", 400,700)
+        #self.bg.place(x=0, y=0, relwidth=1, relheight=1)
 
-        # Create a Canvas widget
-        self.canvas = tk.Canvas(self.root)
-        self.canvas.grid(row=0,column=0)
-
-        # Add background image to the canvas
-        self.canvas.create_image(0, 0, image=self.bg_photo)
-        self.canvas.image = self.bg_photo
 
         # Place Logo
-        self.logo = display_image("assets/logo.png", 400, 150)
+        self.logo = display_image(self.widget_frame,"assets/logo.png", 400, 150)
         self.logo.grid(column=0, row=0, sticky=tk.N + tk.S)
 
         # Place PC Logo
-        self.logo = display_image("assets/PC.PNG", 400, height=300)
+        self.logo = display_image(self.widget_frame,"assets/PC.PNG", 400, height=300)
         self.logo.grid(column=0, row=1, sticky=tk.N + tk.S)
 
         # Instruction Label
-        self.instruction_label = tk.Label(self.root, text="Type the Following Text as fast as you can:",
+        self.instruction_label = tk.Label(self.widget_frame, text="Type the Following Text as fast as you can:",
                                           fg="black",
                                           font=("Helvetica", 16, "bold"))
         self.instruction_label.grid(column=0,row=0, rowspan=2,pady=(0, 10))
 
         # Test Sentence
-        self.test_text_label = tk.Label(self.root, text=self.current_text, wraplength=300, fg="black",
+        self.test_text_label = tk.Label(self.widget_frame, text=self.current_text, wraplength=300, fg="black",
                                         font=("Helvetica", 17))
         self.test_text_label.grid(column=0,row=1, pady=(0, 20))
 
         # Text Box
-        self.text_input = tk.Text(self.root, height=5, width=50, bd=3, relief="solid", bg="white",fg="black")
+        self.text_input = tk.Text(self.widget_frame, height=5, width=50, bd=3, relief="solid", bg="white",fg="black")
         self.text_input.grid(column=0,row=4, pady=10)
 
         # Button
-        self.start_btn = tk.Button(self.root, text="Start", command=self.start_typing_test, fg="black",bg="white",
+        self.start_btn = tk.Button(self.widget_frame, text="Start", command=self.start_typing_test, fg="black",
                                    font=("Helvetica", 15, "bold"))
         self.start_btn.grid(column=0,row=5)
 
         # Result Label
-        self.result_label = tk.Label(self.root, text="", bg="white")
+        self.result_label = tk.Label(self.widget_frame, text="")
         self.result_label.grid(column=0,row=5)
 
         # Restart Button
-        self.restart_btn = tk.Button(self.root, text="Restart", command=self.restart_typing_test)
+        self.restart_btn = tk.Button(self.widget_frame, text="Restart", command=self.restart_typing_test)
         self.restart_btn.grid()
         self.restart_btn.grid_forget()  # Hide Restart Button
 
         # Highscore Label
-        self.high_score_label = tk.Label(self.root, text=f'Highscore {self.high_score}')
-        self.high_score_label.grid()
+        self.high_score_label = tk.Label(self.widget_frame, text=f'Highscore {self.high_score}')
+        self.high_score_label.grid(column=0, row=6)
 
         # Recent Score Label
-        self.recent_score_label = tk.Label(self.root, text="")
+        self.recent_score_label = tk.Label(self.widget_frame, text="")
         self.recent_score_label.grid()
 
     def start_typing_test(self):
