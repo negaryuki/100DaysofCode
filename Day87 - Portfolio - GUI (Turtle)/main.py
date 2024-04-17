@@ -59,7 +59,7 @@ score_display.write("Score: {}".format(score), font=("Courier", 24, "normal"))
 def move_left():
     x = paddle.xcor()  # retrieve current x coordinate of paddle
 
-    if x < 240:
+    if x > -240:
         x -= 20
         paddle.setx(x)
 
@@ -69,7 +69,7 @@ def move_left():
 def move_right():
     x = paddle.xcor()
 
-    if x > -240:
+    if x < 240:
         x += 20
         paddle.setx(x)
 
