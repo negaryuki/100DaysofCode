@@ -32,13 +32,29 @@ ball.dy = -2  # he ball will move 2 units downward in each frame of the game loo
 bricks = []
 colors = ["#FFDE59", "#EF1515", "#00CCE5", "#CB6CE6", "#8ABF94"]
 
-for i in range(5):
-    brick = turtle.Turtle()
-    brick.shape("square")
-    brick.color(colors[i])
-    brick.penup()
-    brick.goto(-200, 250 - i * 25)
-    bricks.append(brick)
+# Define the number of rows and columns of bricks:
+rows = 8      # as you desire
+columns = 10  # as you desire
+
+# Define the starting position of the first brick
+start_x = -200
+start_y = 250
+
+# Define the spacing between bricks
+brick_spacing_x = 50
+brick_spacing_y = 25
+
+for r in range(rows):
+    for c in range (columns):
+        brick = turtle.Turtle()
+        brick.shape("square")
+        #brick.color(colors[r % len(colors)])  Cycle through colors repeatedly
+        brick_color = random.choice(colors)  # random colors
+        brick.color(brick_color)
+        brick.penup()
+        brick.goto(start_x + c * brick_spacing_x, start_y - r * brick_spacing_y)
+        bricks.append(brick)
+        bricks.append(brick)
 
 # ----------- Create Score ----------------
 
