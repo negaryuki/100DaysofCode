@@ -49,7 +49,8 @@ class TypingTestTimeApp:
         self.bg.place(x=0, y=0, relwidth=1, relheight=1)
 
         # Place Logo
-        self.logo = display_image("assets/logo.png", 400, 150, transparent=False)
+        self.logo = display_image("assets/logo.PNG", 400, 150)
+        #self.create_image(350,200,image=self.logo)
         self.logo.grid(column=0, row=0, sticky=tk.N + tk.S)
 
         # Place PC Logo
