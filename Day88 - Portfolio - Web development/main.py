@@ -1,11 +1,13 @@
 from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from form import *
 
 app = Flask(__name__)
 
 # ------- Connect to DB -------------
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cafes.db'
 db = SQLAlchemy(app)  # Initialize db within the app context
+app.config['SECRET_KEY'] = "secretsecret"
 
 
 # ----- Cafe TABLE Configuration -----
@@ -34,7 +36,22 @@ def home():
 @app.route('/all')
 def get_all_cafes():
     all_cafes = Cafe.query.order_by(Cafe.name).all()
-    return jsonify(cafes=[cafe.convert_to_dict() for cafe in all_cafes])
+    return render_template('all_cafe.html', all_cafes=jsonify(cafes=[cafe.convert_to_dict() for cafe in all_cafes]))
+
+@app.route('/signup')
+def signup():
+    form = SignUpForm()
+    return render_template("signup.html", form=form)
+
+@app.route("/search")
+def search_cafe_with_location():
+    location_query = request.args.get("loc")
+    result = db.session.execute(db.select(Cafe).where(Cafe.location == location_query))
+    all_cafes = result.scalars().all()
+    if all_cafes:
+        return jsonify(cafes=[cafe.convert_to_dict() for cafe in all_cafes])
+    else:
+        return jsonify(error={"Not Found": "Sorry, we don't have any cafes in that area "})
 
 
 if __name__ == '__main__':
