@@ -5,9 +5,19 @@
 <img src="/static/assets/img/1.png" width="250" height="250">
 </div>
 
+
+<!------------ Sort Form ------------>
+<div class="sort">
+    <form method="POST" action="{{url_for('get_all_cafes')}}">
+        {{form.csrf_token}}
+        {{form.sort_by.label}}: {{form.sort_by}}
+        <button type="submit">Sort</button>
+    </form>
+</div>
+
+<!------------ Main Table ----------->
 <div class="table container">
     <div class="row">
-
         <table class="cafe_table" style="width:100%">
             <thead>
                 <tr>
@@ -21,7 +31,7 @@
                 <td>WIFI</td>
                 <td>Calls</td>
                 <td>Seats</td>
-                <td>Coffe Price</td>
+                <td>Coffee Price</td>
                 </tr>
             </thead>
 

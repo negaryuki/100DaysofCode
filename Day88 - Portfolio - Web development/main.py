@@ -33,10 +33,12 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/all')
+@app.route('/all', methods=['GET','POST'])
 def get_all_cafes():
-    all_cafes = Cafe.query.order_by(Cafe.id).all()
-    return render_template('all_cafe.html', all_cafes=[cafe.convert_to_dict() for cafe in all_cafes])
+    form = CafeSortForm()
+    sort_by = request.form.get('sort_by','id')  # Default sorting by ID
+    all_cafes = Cafe.query.order_by(sort_by).all()
+    return render_template('all_cafe.html', all_cafes=[cafe.convert_to_dict() for cafe in all_cafes], form=form)
 
 @app.route('/signup')
 def signup():
