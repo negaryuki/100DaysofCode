@@ -9,6 +9,8 @@ class CafeForm (FlaskForm):
     close = StringField("Closing Time", validators=[DataRequired()])
     coffee_rating = SelectField("Coffe Rating", choices=["☕️", "☕☕", "☕☕☕", "☕☕☕☕", "☕☕☕☕☕"], validators=[DataRequired()])
     wifi_rating = SelectField("Wifi Strength Rating", choices=["✘", "💪","💪💪", "💪💪" ])
+    power_rating = SelectField("Power Socket Availability", choices=["✘", "🔌", "🔌🔌", "🔌🔌🔌", "🔌🔌🔌🔌", "🔌🔌🔌🔌🔌"], validators=[DataRequired()])
+    submit = SubmitField('Submit')
 
 
 class SignUpForm(FlaskForm):
