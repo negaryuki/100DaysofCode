@@ -35,7 +35,7 @@ def home():
 
 @app.route('/all')
 def get_all_cafes():
-    all_cafes = Cafe.query.order_by(Cafe.name).all()
+    all_cafes = Cafe.query.order_by(Cafe.id).all()
     return render_template('all_cafe.html', all_cafes=[cafe.convert_to_dict() for cafe in all_cafes])
 
 @app.route('/signup')
