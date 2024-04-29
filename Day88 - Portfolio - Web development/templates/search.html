@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="logo" align="center">
+    <img src="/static/assets/img/search.png" height="300" width="300">
+</div>
+<!------------ Search Form ------------>
+<div class="search">
+    <form method="POST" action="{{ url_for('search') }}">
+        {{ form.csrf_token }}
+        {{ form.location.label }}: {{ form.location(size=20, autofocus=true) }}
+        <button type="submit">Search</button>
+    </form>
+</div>
+<!------------ Main Table ----------->
+<div class="table container">
+    <div class="row">
+        <table class="cafe_table" style="width:100%">
+            <thead>
+                <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Map Link</td>
+                <td>Image link</td>
+                <td>Location</td>
+                <td>Sockets</td>
+                <td>Toilets</td>
+                <td>WIFI</td>
+                <td>Calls</td>
+                <td>Seats</td>
+                <td>Coffee Price</td>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for cafe in cafes %}
+            <tr>
+                <td>{{cafe.id}}</td>
+                <td>{{cafe.name}}</td>
+                <td><a href="{{ cafe.map_url }}">Map Link</a></td>
+                <td><a href="{{ cafe.img_url }}">Image Link</a></td>
+                <td>{{ cafe.location }}</td>
+                <td>{{ '✅' if cafe.has_sockets else '❌'}}</td>
+                <td>{{ '✅' if cafe.has_toilet else '❌' }}</td>
+                <td>{{ '✅' if cafe.has_wifi else '❌' }}</td>
+                <td>{{ '✅' if cafe.can_take_calls else '❌' }}</td>
+                <td>{{cafe.seats}}</td>
+                <td>{{cafe.coffee_price}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

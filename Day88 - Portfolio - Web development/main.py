@@ -33,27 +33,28 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/all', methods=['GET','POST'])
+@app.route('/all', methods=['GET', 'POST'])
 def get_all_cafes():
     form = CafeSortForm()
-    sort_by = request.form.get('sort_by','id')  # Default sorting by ID
+    sort_by = request.form.get('sort_by', 'id')  # Default sorting by ID
     all_cafes = Cafe.query.order_by(sort_by).all()
     return render_template('all_cafe.html', all_cafes=[cafe.convert_to_dict() for cafe in all_cafes], form=form)
+
 
 @app.route('/signup')
 def signup():
     form = SignUpForm()
     return render_template("signup.html", form=form)
 
-@app.route("/search")
-def search_cafe_with_location():
-    location_query = request.args.get("loc")
-    result = db.session.execute(db.select(Cafe).where(Cafe.location == location_query))
-    all_cafes = result.scalars().all()
-    if all_cafes:
-        return jsonify(cafes=[cafe.convert_to_dict() for cafe in all_cafes])
-    else:
-        return jsonify(error={"Not Found": "Sorry, we don't have any cafes in that area "})
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    form = Search()
+    if form.validate_on_submit():
+        location = form.location.data
+        result = db.session.query(Cafe).filter(Cafe.location == location)
+        return render_template('search.html', form=form, cafes=result)
+    return render_template('search.html', form=form)
 
 
 if __name__ == '__main__':
