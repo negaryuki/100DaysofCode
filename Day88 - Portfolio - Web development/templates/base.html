@@ -33,10 +33,13 @@
           <a class="nav-link active" aria-current="page" href="{{ url_for('get_all_cafes')}}">All Cafes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Random Cafe</a>
+          <a class="nav-link" href="{{ url_for('random')}}">Random Cafe</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('search')}}"aria-disabled="true">Search By Location</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('signup')}}">SignUp</a>
         </li>
       </ul>
       <form class="d-flex" role="search">

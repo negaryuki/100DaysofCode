@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from form import *
+from random import choice
 
 app = Flask(__name__)
 
@@ -45,6 +46,13 @@ def get_all_cafes():
 def signup():
     form = SignUpForm()
     return render_template("signup.html", form=form)
+
+@app.route('/random')
+def random():
+    form = CafeForm()
+    all_cafes = db.session.query(Cafe).all()
+    random_cafe = choice(all_cafes)
+    return render_template('random.html', cafes=[random_cafe], form=form)
 
 
 @app.route("/search", methods=["GET", "POST"])
