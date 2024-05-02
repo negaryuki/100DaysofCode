@@ -42,7 +42,7 @@ def get_all_cafes():
     return render_template('all_cafe.html', all_cafes=[cafe.convert_to_dict() for cafe in all_cafes], form=form)
 
 
-@app.route('/signup')
+@app.route('/signup', methods=["GET", "POST"])
 def signup():
     form = SignUpForm()
     return render_template("signup.html", form=form)
