@@ -1,20 +1,20 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField, PasswordField
+from wtforms import StringField, SubmitField, SelectField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, URL
 
 
 class CafeForm(FlaskForm):
     name = StringField('Cafe Name', validators=[DataRequired()])
-    location = StringField("Cafe Location")
-    open_time = StringField("Opening Time", validators=[DataRequired()])
-    close_time = StringField("Closing Time", validators=[DataRequired()])
-    coffee_rating = SelectField("Coffe Rating", choices=["☕️", "☕☕", "☕☕☕", "☕☕☕☕", "☕☕☕☕☕"],
-                                validators=[DataRequired()])
-    wifi_rating = SelectField("Wifi Strength Rating", choices=["✘", "💪", "💪💪", "💪💪💪"])
-    power_rating = SelectField("Power Socket Availability", choices=["✘", "🔌", "🔌🔌", "🔌🔌🔌", "🔌🔌🔌🔌", "🔌🔌🔌🔌🔌"],
-                               validators=[DataRequired()])
+    map_url = StringField('Map URL', validators=[DataRequired(), URL()])
+    img_url = StringField('Image URL', validators=[DataRequired(), URL()])
+    location = StringField("Location", validators=[DataRequired()])
+    has_sockets = BooleanField("Has Sockets", validators=[DataRequired()])
+    has_toilet = BooleanField("Has Toilet", validators=[DataRequired()])
+    has_wifi = BooleanField("Has WiFi", validators=[DataRequired()])
+    can_take_calls = BooleanField("Can Take Calls", validators=[DataRequired()])
+    seats = StringField("Seats")
+    coffee_price = StringField("Coffee Price")
     submit = SubmitField('Submit')
-
 
 class SignUpForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])

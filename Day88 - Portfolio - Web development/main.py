@@ -69,21 +69,24 @@ def search():
 
 
 @app.route('/add', methods=["GET", "POST"])
-def add_cafe():
+def add_cafe(new_cafe=None):
     form = CafeForm()
     if form.validate_on_submit():
         new_cafe = Cafe(
             name=form.name.data,
+            map_url=form.map_url.data,
+            img_url=form.img_url.data,
             location=form.location.data,
-            open=form.open.data,
-            close=form.close.data,
-            coffee_rating=form.coffee_rating.data,
-            wifi_rating=form.wifi_rating.data,
-            power_rating=form.power_rating.data
-        )
+            has_sockets=form.has_sockets.data,
+            has_toilet=form.has_toilet.data,
+            has_wifi=form.has_wifi.data,
+            can_take_calls=form.can_take_calls.data,
+            seats=form.seats.data,
+            coffee_price=form.seats.data)
+
         db.session.add(new_cafe)
         db.session.commit()
-        return redirect(url_for('all_cafes'))
+        return redirect(url_for('get_all_cafes'))
     return render_template('add.html', form=form)
 
 
