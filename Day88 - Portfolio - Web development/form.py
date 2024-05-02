@@ -4,13 +4,13 @@ from wtforms.validators import DataRequired, URL
 
 
 class CafeForm(FlaskForm):
-    cafe = StringField('Cafe Name', validators=[DataRequired()])
+    name = StringField('Cafe Name', validators=[DataRequired()])
     location = StringField("Cafe Location")
-    open = StringField("Opening Time", validators=[DataRequired()])
-    close = StringField("Closing Time", validators=[DataRequired()])
+    open_time = StringField("Opening Time", validators=[DataRequired()])
+    close_time = StringField("Closing Time", validators=[DataRequired()])
     coffee_rating = SelectField("Coffe Rating", choices=["☕️", "☕☕", "☕☕☕", "☕☕☕☕", "☕☕☕☕☕"],
                                 validators=[DataRequired()])
-    wifi_rating = SelectField("Wifi Strength Rating", choices=["✘", "💪", "💪💪", "💪💪"])
+    wifi_rating = SelectField("Wifi Strength Rating", choices=["✘", "💪", "💪💪", "💪💪💪"])
     power_rating = SelectField("Power Socket Availability", choices=["✘", "🔌", "🔌🔌", "🔌🔌🔌", "🔌🔌🔌🔌", "🔌🔌🔌🔌🔌"],
                                validators=[DataRequired()])
     submit = SubmitField('Submit')
@@ -30,6 +30,7 @@ class CafeSortForm(FlaskForm):
         ('seats', 'Seats'),
         ('coffee_price', 'Coffee Price')
     ])
+
 
 class Search(FlaskForm):
     location = StringField("Location", validators=[DataRequired()])

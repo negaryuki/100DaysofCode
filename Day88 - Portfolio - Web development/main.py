@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from flask_bootstrap import Bootstrap
 from form import *
 from random import choice
 
@@ -9,6 +10,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cafes.db'
 db = SQLAlchemy(app)  # Initialize db within the app context
 app.config['SECRET_KEY'] = "secretsecret"
+Bootstrap(app)
 
 
 # ----- Cafe TABLE Configuration -----
@@ -47,6 +49,7 @@ def signup():
     form = SignUpForm()
     return render_template("signup.html", form=form)
 
+
 @app.route('/random')
 def random():
     form = CafeForm()
@@ -63,6 +66,25 @@ def search():
         result = db.session.query(Cafe).filter(Cafe.location == location)
         return render_template('search.html', form=form, cafes=result)
     return render_template('search.html', form=form)
+
+
+@app.route('/add', methods=["GET", "POST"])
+def add_cafe():
+    form = CafeForm()
+    if form.validate_on_submit():
+        new_cafe = Cafe(
+            name=form.name.data,
+            location=form.location.data,
+            open=form.open.data,
+            close=form.close.data,
+            coffee_rating=form.coffee_rating.data,
+            wifi_rating=form.wifi_rating.data,
+            power_rating=form.power_rating.data
+        )
+        db.session.add(new_cafe)
+        db.session.commit()
+        return redirect(url_for('all_cafes'))
+    return render_template('add.html', form=form)
 
 
 if __name__ == '__main__':
