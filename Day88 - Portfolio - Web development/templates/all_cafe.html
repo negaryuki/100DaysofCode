@@ -49,6 +49,7 @@
                 <td>{{ '✅' if cafe.can_take_calls else '❌' }}</td>
                 <td>{{ cafe.seats}}</td>
                 <td>{{cafe.coffee_price}}</td>
+                <td><a href="{{ url_for('update', cafe_id=cafe.id) }}">Update</a></td>
             </tr>
             {% endfor %}
             </tbody>

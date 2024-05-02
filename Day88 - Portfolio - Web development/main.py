@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from form import *
@@ -93,6 +93,31 @@ def add_cafe(new_cafe=None):
             return redirect(url_for('get_all_cafes'))
     return render_template('add.html', form=form)
 
+
+@app.route('/update/<int:cafe_id>', methods=['GET', 'POST'])
+def update(cafe_id):
+    cafe = Cafe.query.get(cafe_id)
+    if not cafe:
+        flash('Cafe not found.', 'error')
+        return redirect(url_for('home'))
+
+    form = CafeForm(obj=cafe)
+    if form.validate_on_submit():
+        cafe.name = form.name.data
+        cafe.location = form.location.data
+        cafe.map_url = form.map_url.data
+        cafe.img_url = form.img_url.data
+        cafe.has_sockets = form.has_sockets.data
+        cafe.has_toilet = form.has_toilet.data
+        cafe.has_wifi = form.has_wifi.data
+        cafe.can_take_calls = form.can_take_calls.data
+        cafe.seats = form.seats.data
+        cafe.coffee_price = form.coffee_price.data
+        db.session.commit()  # Commit the changes to the database
+        flash('Cafe information updated successfully.', 'success')
+        return redirect(url_for('get_all_cafes'))
+
+    return render_template('update.html', form=form, cafe=cafe)
 
 if __name__ == '__main__':
     app.run(debug=True)
