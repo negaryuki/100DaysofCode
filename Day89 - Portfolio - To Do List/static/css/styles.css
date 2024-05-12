@@ -2,3 +2,16 @@
   background-color: #FDF1F1;
 }
 
+h1{
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: bold 700;
+  font-style: normal;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+    }
