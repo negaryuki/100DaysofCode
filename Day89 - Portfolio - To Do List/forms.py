@@ -1,13 +1,12 @@
-from wtforms import TextAreaField, SubmitField, DateField
+from wtforms import BooleanField, SubmitField, StringField, DateField
 from wtforms.validators import DataRequired
 from flask_wtf import FlaskForm
 
 
-class DateForm(FlaskForm):
-    date_info = TextAreaField('Date', validators=[DataRequired()])
-    submit_date = SubmitField('Submit Date')
+# Define the WTForms task form
+class TaskForm(FlaskForm):
+    date = DateField('Date', format='%Y-%m-%d', validators=[DataRequired()])
+    description = StringField("Task", validators=[DataRequired()])
+    completed = BooleanField('Completed')
+    submit = SubmitField('Submit')
 
-
-class ToDoForm(FlaskForm):
-    todo_info = TextAreaField('Add Task', validators=[DataRequired()])
-    submit_todo = SubmitField('Submit Task')
