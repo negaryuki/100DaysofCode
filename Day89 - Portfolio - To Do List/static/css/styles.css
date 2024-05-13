@@ -18,17 +18,24 @@ h2, h3, h4, h5, h6 {
 
 
 .moods {
-    width: auto;
-    height: 100px;
-    border: 2px solid pink;
+    border: solid pink;
     background-color: pink;
-    border-collapse: collapse;
-    border-spacing: 0;
-    margin-left: 1px;
-    padding-left: 1px;
+    padding: 20;
 }
 
 .moods a {
-    padding: 0;
-    margin: 0;
+    border: solid pink;
+    background-color: pink;
+    padding: 40;
+    padding-top: 0;
+}
+
+.date {
+padding-bottom: 50px;
+padding-top:20 px;
+background-color: blue;
+}
+
+.todo{
+background-color: red
 }

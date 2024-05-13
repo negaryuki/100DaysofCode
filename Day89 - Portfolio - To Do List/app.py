@@ -35,7 +35,7 @@ def home():
         return redirect(url_for('home'))
 
     tasks = Tasks.query.all()
-    return render_template('index.html', tasks=tasks, form = form)
+    return render_template('base.html', tasks=tasks, form = form)
 
 
 if __name__ == '__main__':

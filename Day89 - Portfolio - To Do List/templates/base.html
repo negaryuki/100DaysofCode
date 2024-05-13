@@ -44,14 +44,18 @@
 <div class="grid text-center mt-3" style="--bs-columns: 4; --bs-gap: 5rem;">
   <div class="header-sec1 row">
 
-    <div class="date col-md-6">
+    <div class="rightside  col-md-6">
+    <div class="date">
     <h2> Date </h2>
+    {{ form.date }}
+    </div>
 
 
 <!------------ Section 2 - Mood ------------>
-      <h3> My Mood Today</h3>
-      <div class="moods">
 
+   <div class="moods">
+
+      <h3> My Mood Today</h3>
         <a class="love_deact" href='#'>
         <img src="/static/assets/img/love_deact.png" alt="Bootstrap" width="80" height="100">
         </a>
@@ -71,13 +75,12 @@
       </div>
     </div>
 
-    <div class="todo col-md-6">
+  <div class="todo col-md-6">
     <h2> To Do: </h2>
-
     </div>
+
   </div>
 
-</div>
 
     {% block content %}
     {% endblock %}
