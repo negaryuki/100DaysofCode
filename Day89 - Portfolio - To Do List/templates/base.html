@@ -44,8 +44,10 @@
 <div class="grid text-center mt-3" style="--bs-columns: 4; --bs-gap: 5rem;">
   <div class="header-sec1 row">
 
-    <div class="rightside  col-md-6">
-    <div class="date">
+    <div class="right_side  col-md-6">
+
+
+      <div class="date">
     <h2> Date </h2>
     {{ form.date }}
     </div>
@@ -105,14 +107,62 @@
 
     <form method="POST">
 
-  <div class="form-task">
+  <div class="form-task align-items-center">
     <div class="row">
         <div class="col">
             {{ form.description(class="form-control") }}
         </div>
-        <div class="col-1">
+        <div class="col-auto">
             {{ form.completed(class="form-check-input bigger-checkbox") }}
         </div>
+        <div class="edit row">
+           <div class="col"><a href="#">Edit</a></div>
+          <div class="col"><a href="#">Delete</a></div>
+    </div>
+<!----------------- Task No2.------------------->
+        <div class="col">
+            {{ form.description(class="form-control") }}
+        </div>
+        <div class="col-auto">
+            {{ form.completed(class="form-check-input bigger-checkbox") }}
+        </div>
+        <div class="edit row">
+           <div class="col"><a href="#">Edit</a></div>
+          <div class="col"><a href="#">Delete</a></div>
+    </div>
+
+<!----------------- Task No3.------------------->
+        <div class="col">
+            {{ form.description(class="form-control") }}
+        </div>
+        <div class="col-auto">
+            {{ form.completed(class="form-check-input bigger-checkbox") }}
+        </div>
+        <div class="edit row">
+           <div class="col"><a href="#">Edit</a></div>
+          <div class="col"><a href="#">Delete</a></div>
+    </div>
+<!----------------- Task No4.------------------->
+        <div class="col">
+            {{ form.description(class="form-control") }}
+        </div>
+        <div class="col-auto">
+            {{ form.completed(class="form-check-input bigger-checkbox") }}
+        </div>
+        <div class="edit row">
+           <div class="col"><a href="#">Edit</a></div>
+          <div class="col"><a href="#">Delete</a></div>
+    </div>
+<!----------------- Task No5.------------------->
+        <div class="col">
+            {{ form.description(class="form-control") }}
+        </div>
+        <div class="col-auto">
+            {{ form.completed(class="form-check-input bigger-checkbox") }}
+        </div>
+        <div class="edit row">
+           <div class="col"><a href="#">Edit</a></div>
+          <div class="col"><a href="#">Delete</a></div>
     </div>
 </div>
 
