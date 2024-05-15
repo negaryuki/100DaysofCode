@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #FDF1F1;
+  background-color: #cdb4db;
 }
 
 h1{
@@ -18,43 +18,90 @@ h2, h3, h4, h5, h6 {
 
 
 .moods {
-    border: solid pink;
-    background-color: pink;
-    padding: 20;
+    padding: 0px ;
+    border: 4px solid #ffafcc;
+    margin-left: 10px;
+    margin-bottom: 10px;
 }
 
+.moods h3 {
+    padding: 10px;
+    border: 3px solid #ffafcc;
+    background-color: #ffc8dd;
+
+}
+
+
 .moods a {
-    border: solid pink;
-    background-color: pink;
-    padding: 40;
-    padding-top: 0;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.moods a:hover{
+    color: #ffc8dd;
+}
+
+
+.date h2 {
+    padding: 10px;
+    border: 3px solid #cdb4db;
+    background-color: #cdb4db;
+
 }
 
 .date {
-padding-bottom: 50px;
-padding-top:20 px;
-background-color: blue;
+    padding: 0px ;
+    border: 4px solid #cdb4db;;
+    margin-left: 10px;
+    margin-bottom: 10px;
+
+}
+
+
+
+ /* Customize Date Picker Box */
+.date-picker {
+    border: 1px solid #ccc;
+    background-color: #cdb4db;
+    padding: 7px;
+    border-radius: 5px;
+    text-align: center;
+    width: 150px;
+    margin:auto;
+    color:black
 }
 
 .todo{
-background-color: red
+
 }
 
 
 .water  {
-    margin:1px;
-    padding:1px;
-    background-color: yellow;
+    padding: 0px ;
+    border: 4px solid #a2d2ff;
+    margin-left: 10px;
+    margin-bottom: 10px;
 }
 
 .water a {
-    padding-left: 10;
-    background-color: red;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.water h3 {
+    padding: 10px;
+    border: 3px solid #a2d2ff;
+    background-color: #bde0fe;
+}
+
+.water_logo:{
+margin: 0px;
+padding-top:2px;
 }
 
 .water img {
-    background-color: red;
-}
+    background-color:
+    }
 
 .task_container{
 background-color: green;
@@ -79,10 +126,10 @@ a {
 }
 
 a:hover {
-    color: blue;
+    color: #ffc8dd;
 }
 
 .form-control{
-background-color: pink;
+background-color: #bde0fe;
 }
 
