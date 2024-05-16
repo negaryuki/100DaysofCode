@@ -50,6 +50,7 @@
       <div class="date">
           <h2> Date </h2>
     {{ form.date (class="form-control date-picker") }}
+
       </div>
 
 
@@ -110,18 +111,12 @@
   <div class="form-task align-items-center">
     <div class="row">
         <div class="col">
-            {{ form.description(class="form-control") }}
-        </div>
-        <div class="col-auto">
-            {{ form.completed(class="form-check-input bigger-checkbox") }}
-        </div>
-        <div class="edit row">
-           <div class="col"><a href="#">Edit</a></div>
-          <div class="col"><a href="#">Delete</a></div>
-    </div>
-<!----------------- Task No2.------------------->
-        <div class="col">
-            {{ form.description(class="form-control") }}
+            <ul>
+                {% for task in tasks %}
+                 <li> {{task}}</li>
+                {% endfor %}
+
+            </ul>
         </div>
         <div class="col-auto">
             {{ form.completed(class="form-check-input bigger-checkbox") }}
@@ -131,39 +126,6 @@
           <div class="col"><a href="#">Delete</a></div>
     </div>
 
-<!----------------- Task No3.------------------->
-        <div class="col">
-            {{ form.description(class="form-control") }}
-        </div>
-        <div class="col-auto">
-            {{ form.completed(class="form-check-input bigger-checkbox") }}
-        </div>
-        <div class="edit row">
-           <div class="col"><a href="#">Edit</a></div>
-          <div class="col"><a href="#">Delete</a></div>
-    </div>
-<!----------------- Task No4.------------------->
-        <div class="col">
-            {{ form.description(class="form-control") }}
-        </div>
-        <div class="col-auto">
-            {{ form.completed(class="form-check-input bigger-checkbox") }}
-        </div>
-        <div class="edit row">
-           <div class="col"><a href="#">Edit</a></div>
-          <div class="col"><a href="#">Delete</a></div>
-    </div>
-<!----------------- Task No5.------------------->
-        <div class="col">
-            {{ form.description(class="form-control") }}
-        </div>
-        <div class="col-auto">
-            {{ form.completed(class="form-check-input bigger-checkbox") }}
-        </div>
-        <div class="edit row">
-           <div class="col"><a href="#">Edit</a></div>
-          <div class="col"><a href="#">Delete</a></div>
-    </div>
 
 <!----------------- Add Button------------------->
 <button type="button" class="btn btn-outline-danger">Add New Task</button>

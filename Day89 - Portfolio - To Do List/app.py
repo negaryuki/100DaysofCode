@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from forms import *
@@ -28,15 +28,29 @@ class Tasks(db.Model):
 @app.route('/')
 def home():
     form = TaskForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        date = form.date.data
+        if date:
+            tasks = Tasks.query.filter_by(date=date).all()
+            return render_template('base.html', form=form, tasks=tasks)
+
+        else:
+            error_msg = "Please enter a date first"
+            return render_template(url_for('home'), error_msg=error_msg)
+
+    return render_template('base.html', form=form)
+
+
+@app.route('/add', methods=['GET', 'POST'])
+def add():
+    form = TaskForm()
     if form.validate_on_submit():
-        new_task = Tasks(date=form.date.data, description = form.description.data,completed=form.completed.data)
+        new_task = Tasks(date=form.date.data, description=form.description.data)
         db.session.add(new_task)
         db.session.commit()
         return redirect(url_for('home'))
 
-    tasks = Tasks.query.all()
-    return render_template('base.html', tasks=tasks, form = form)
-
+    return render_template('add.html', form=form)
 
 if __name__ == '__main__':
     app.run(debug=True)
