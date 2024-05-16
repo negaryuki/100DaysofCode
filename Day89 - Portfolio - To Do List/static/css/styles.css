@@ -19,14 +19,14 @@ h2, h3, h4, h5, h6 {
 
 .moods {
     padding: 0px ;
-    border: 4px solid #ffafcc;
+    border: 4px solid #ffc8dd;
     margin-left: 10px;
     margin-bottom: 10px;
 }
 
 .moods h3 {
     padding: 10px;
-    border: 3px solid #ffafcc;
+    border: 3px solid #ffc8dd;
     background-color: #ffc8dd;
 
 }
@@ -78,7 +78,7 @@ h2, h3, h4, h5, h6 {
 
 .water  {
     padding: 0px ;
-    border: 4px solid #a2d2ff;
+    border: 4px solid #bde0fe;
     margin-left: 10px;
     margin-bottom: 10px;
 }
@@ -90,7 +90,7 @@ h2, h3, h4, h5, h6 {
 
 .water h3 {
     padding: 10px;
-    border: 3px solid #a2d2ff;
+    border: 3px solid #bde0fe;
     background-color: #bde0fe;
 }
 
