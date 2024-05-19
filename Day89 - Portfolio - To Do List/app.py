@@ -33,14 +33,15 @@ def home():
         date = form.date.data.strftime('%Y-%m-%d')
         tasks = Tasks.query.filter_by(date=date).all()
     else:
-        tasks = Tasks.query.all()
-    return render_template('index.html', form=form, tasks=tasks)
+        date = form.date.data
+        tasks = Tasks.query.filter_by(date=date).all()
 
+    return render_template('index.html', form=form, tasks=tasks)
 @app.route('/add', methods=['GET', 'POST'])
 def add():
     form = TaskForm()
     if form.validate_on_submit():
-        date = int(form.date.data.strftime('%Y%m%d'))
+        date = form.date.data.strftime('%Y-%m-%d')
         description = form.description.data
         new_task = Tasks(date=date, description=description)
         db.session.add(new_task)
