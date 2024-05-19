@@ -13,4 +13,4 @@ class TaskForm(FlaskForm):
 
 class DateForm(FlaskForm):
     date = DateField('Date', format='%Y-%m-%d', validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Submit', validators=[DataRequired()])

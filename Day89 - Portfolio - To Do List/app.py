@@ -28,11 +28,8 @@ class Tasks(db.Model):
 @app.route('/', methods=['GET', 'POST'])
 def home():
     form = DateForm()
-    tasks = []
-    if request.method == 'POST' and form.validate_on_submit():
-        date = form.date.data.strftime('%Y-%m-%d')
-        tasks = Tasks.query.filter_by(date=date).all()
-    else:
+
+    if request.method == 'POST':
         date = form.date.data
         tasks = Tasks.query.filter_by(date=date).all()
 
