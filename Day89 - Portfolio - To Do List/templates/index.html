@@ -12,8 +12,10 @@
 
       <div class="date">
           <h2> Date </h2>
+    <form method="POST" action="{{ url_for('home') }}">
     {{ form.date (class="form-control date-picker") }}
     {{ form.submit (class="form-control date-picker") }}
+    </form>
       </div>
 
 
@@ -69,14 +71,13 @@
 
     <div class="task_container ">
 
-    <form method="POST" action="{{ url_for('add') }}">
 
   <div class="form-task align-items-center">
     <div class="row">
         <div class="col">
             <ul>
                 {% for task in tasks %}
-                 <li>{{task}}</li>
+                 <li>{{task.description}}</li>
                 {% endfor %}
             </ul>
         </div>
@@ -84,7 +85,7 @@
   </div>
         <!-- Add Button -->
    <button type="submit" class="btn btn-outline-danger">Add New Task</button>
-      </form>
+
     </div>
     </div>
     </div>

@@ -28,18 +28,13 @@ class Tasks(db.Model):
 @app.route('/', methods=['GET', 'POST'])
 def home():
     form = DateForm()
+    tasks = []
     if request.method == 'POST' and form.validate_on_submit():
-        date = int(form.date.data.strftime('%Y%m%d'))
-        if date:
-            tasks = Tasks.query.filter_by(date=date).all()
-            return render_template('index.html', form=form, tasks=tasks)
-
-        else:
-            error_msg = "Please enter a date first"
-            return render_template('index.html', form=form, error_msg=error_msg)
-
-    return render_template('index.html', form=form)
-
+        date = form.date.data.strftime('%Y-%m-%d')
+        tasks = Tasks.query.filter_by(date=date).all()
+    else:
+        tasks = Tasks.query.all()
+    return render_template('index.html', form=form, tasks=tasks)
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
