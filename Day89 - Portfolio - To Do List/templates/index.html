@@ -24,7 +24,7 @@
    <div class="moods">
 
       <h3> My Mood Today</h3>
-        <a class="love_deact" href='#'>
+        <a id="love" class="love_deact" href='#'>
         <img src="/static/assets/img/love_deact.png" alt="Bootstrap" width="80" height="100">
         </a>
 
@@ -46,7 +46,7 @@
     <h3> Water Tracker</h3>
      <img class="water_logo" src="/static/assets/img/water_logo.png" alt="Bootstrap" width="120" height="150">
 
-    <a class="empty_glass" href='#'>
+    <a class="empty_glass" id ="water1">
         <img src="/static/assets/img/empty_glass.png" alt="Bootstrap" width="100" height="120">
     </a>
 
@@ -97,5 +97,16 @@
     </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('love').addEventListener('click', function() {
+        this.innerHTML = '<img src="/static/assets/img/love_act.png" alt="Bootstrap" width="60" height="80">';
+    });
+
+        document.getElementById('water1').addEventListener('click', function() {
+        this.innerHTML = '<img src="/static/assets/img/full_glass.png" alt="Bootstrap" width="120" height="150">';
+    });
+
+</script>
 
 {% endblock %}
