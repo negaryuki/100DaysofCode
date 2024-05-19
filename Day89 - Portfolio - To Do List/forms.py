@@ -10,6 +10,7 @@ class TaskForm(FlaskForm):
     completed = BooleanField('Completed')
     submit = SubmitField('Submit')
 
+
 class DateForm(FlaskForm):
     date = DateField('Date', format='%Y-%m-%d', validators=[DataRequired()])
     submit = SubmitField('Submit')

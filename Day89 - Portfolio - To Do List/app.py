@@ -25,18 +25,18 @@ class Tasks(db.Model):
 #    db.create_all()
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
     form = DateForm()
     if request.method == 'POST' and form.validate_on_submit():
-        date = form.date.data
+        date = int(form.date.data.strftime('%Y%m%d'))
         if date:
             tasks = Tasks.query.filter_by(date=date).all()
-            return render_template('base.html', form=form, tasks=tasks)
+            return render_template('index.html', form=form, tasks=tasks)
 
         else:
             error_msg = "Please enter a date first"
-            return render_template(url_for('home'), error_msg=error_msg)
+            return render_template('index.html', form=form, error_msg=error_msg)
 
     return render_template('index.html', form=form)
 
@@ -45,12 +45,15 @@ def home():
 def add():
     form = TaskForm()
     if form.validate_on_submit():
-        new_task = Tasks(date=form.date.data, description=form.description.data)
+        date = int(form.date.data.strftime('%Y%m%d'))
+        description = form.description.data
+        new_task = Tasks(date=date, description=description)
         db.session.add(new_task)
         db.session.commit()
         return redirect(url_for('home'))
 
     return render_template('add.html', form=form)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
