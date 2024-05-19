@@ -79,6 +79,7 @@
                 {% for task in tasks %}
                     <li>{{ task.description }}
                         <form method="POST" action="{{ url_for('delete', task_id=task.id) }}" style="display: inline;">
+                            <input type="checkbox" name="completed" value="{{ task.id }}" {% if task.completed %}checked{% endif %}>
                             <input type="hidden" name="task_id" value="{{ task.id }}">
                             <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
                         </form>
