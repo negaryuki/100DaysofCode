@@ -28,12 +28,14 @@ class Tasks(db.Model):
 @app.route('/', methods=['GET', 'POST'])
 def home():
     form = DateForm()
-
+    tasks=[]
     if request.method == 'POST':
         date = form.date.data
         tasks = Tasks.query.filter_by(date=date).all()
 
     return render_template('index.html', form=form, tasks=tasks)
+
+
 @app.route('/add', methods=['GET', 'POST'])
 def add():
     form = TaskForm()
@@ -46,6 +48,14 @@ def add():
         return redirect(url_for('home'))
 
     return render_template('add.html', form=form)
+
+
+@app.route('/delete/<int:task_id>', methods=['GET', 'POST'])
+def delete(task_id):
+    task = Tasks.query.get_or_404(task_id)
+    db.session.delete(task)
+    db.session.commit()
+    return redirect(url_for('home'))
 
 
 if __name__ == '__main__':

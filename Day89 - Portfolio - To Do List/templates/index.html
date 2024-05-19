@@ -77,7 +77,12 @@
         <div class="col">
             <ul>
                 {% for task in tasks %}
-                 <li>{{task.description}}</li>
+                    <li>{{ task.description }}
+                        <form method="POST" action="{{ url_for('delete', task_id=task.id) }}" style="display: inline;">
+                            <input type="hidden" name="task_id" value="{{ task.id }}">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                        </form>
+                    </li>
                 {% endfor %}
             </ul>
         </div>
@@ -87,7 +92,6 @@
    <form method="POST" action="{{ url_for('add') }}">
    <button type="submit" class="btn btn-outline-danger">Add New Task</button>
     </form>
-
     </div>
     </div>
     </div>
