@@ -27,7 +27,7 @@ class Tasks(db.Model):
 
 @app.route('/')
 def home():
-    form = TaskForm()
+    form = DateForm()
     if request.method == 'POST' and form.validate_on_submit():
         date = form.date.data
         if date:
@@ -38,7 +38,7 @@ def home():
             error_msg = "Please enter a date first"
             return render_template(url_for('home'), error_msg=error_msg)
 
-    return render_template('base.html', form=form)
+    return render_template('index.html', form=form)
 
 
 @app.route('/add', methods=['GET', 'POST'])

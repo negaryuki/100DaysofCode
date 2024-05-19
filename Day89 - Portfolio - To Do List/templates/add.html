@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block title %}Daily Planner{% endblock %}
+{% block content %}
+
+<div class="new_task d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+<form method="POST">
+         {{ form.csrf_token }}
+        {{ wtf.quick_form(form) }}
+    </form>
+</div>
+{% endblock %}

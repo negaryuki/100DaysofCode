@@ -3,4 +3,91 @@
 {% block title %}Daily Planner {% endblock %}
 {% block content %}
 
+<!------------ Section 1 - date / task ------------>
+<div class="grid text-center mt-3" style="--bs-columns: 4; --bs-gap: 5rem;">
+  <div class="header-sec1 row">
+
+    <div class="right_side  col-md-6">
+
+
+      <div class="date">
+          <h2> Date </h2>
+    {{ form.date (class="form-control date-picker") }}
+    {{ form.submit (class="form-control date-picker") }}
+      </div>
+
+
+<!------------ Section 2 - Mood ------------>
+
+   <div class="moods">
+
+      <h3> My Mood Today</h3>
+        <a class="love_deact" href='#'>
+        <img src="/static/assets/img/love_deact.png" alt="Bootstrap" width="80" height="100">
+        </a>
+
+        <a class="happy_deact" href='#'>
+        <img src="/static/assets/img/happy_deact.png" alt="Bootstrap" width="80" height="100">
+        </a>
+
+        <a class="sad_deact" href='#'>
+        <img src="/static/assets/img/sad_deact.png" alt="Bootstrap" width="80" height="100">
+        </a>
+
+         <a class="angry_deact" href='#'>
+        <img src="/static/assets/img/angry_deact.png" alt="Bootstrap" width="80" height="100">
+        </a>
+
+      </div>
+
+  <div class="water">
+    <h3> Water Tracker</h3>
+     <img class="water_logo" src="/static/assets/img/water_logo.png" alt="Bootstrap" width="120" height="150">
+
+    <a class="empty_glass" href='#'>
+        <img src="/static/assets/img/empty_glass.png" alt="Bootstrap" width="100" height="120">
+    </a>
+
+       <a class="empty_glass" href='#'>
+        <img src="/static/assets/img/empty_glass.png" alt="Bootstrap" width="100" height="120">
+    </a>
+
+       <a class="empty_glass" href='#'>
+        <img src="/static/assets/img/empty_glass.png" alt="Bootstrap" width="100" height="120">
+    </a>
+
+       <a class="empty_glass" href='#'>
+        <img src="/static/assets/img/empty_glass.png" alt="Bootstrap" width="100" height="120">
+    </a>
+
+  </div>
+
+  </div>
+
+  <div class="todo col-md-6">
+    <h2> To Do: </h2>
+
+    <div class="task_container ">
+
+    <form method="POST" action="{{ url_for('add') }}">
+
+  <div class="form-task align-items-center">
+    <div class="row">
+        <div class="col">
+            <ul>
+                {% for task in tasks %}
+                 <li>{{task}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+  </div>
+        <!-- Add Button -->
+   <button type="submit" class="btn btn-outline-danger">Add New Task</button>
+      </form>
+    </div>
+    </div>
+    </div>
+</div>
+
 {% endblock %}
