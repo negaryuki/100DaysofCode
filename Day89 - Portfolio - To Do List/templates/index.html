@@ -12,9 +12,9 @@
 
       <div class="date">
           <h2> Date </h2>
-    <form method="POST" action="{{ url_for('home') }}">
-    {{ form.date (class="form-control date-picker") }}
-    {{ form.submit (class="form-control date-picker") }}
+    <form method="POST" action="{{ url_for('home') }}" class="d-flex justify-content-center align-items-center date_form">
+    {{ form.date (class="form-control date-picker me-2") }}
+    {{ form.submit(class="btn btn-outline-danger date-submit", value="Submit") }}
     </form>
       </div>
 
