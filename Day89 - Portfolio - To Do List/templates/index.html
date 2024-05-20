@@ -67,17 +67,15 @@
   </div>
 
   <div class="todo col-md-6">
-    <h2> To Do: </h2>
-
     <div class="task_container ">
-
+    <h2> To Do: </h2>
 
   <div class="form-task align-items-center">
     <div class="row">
         <div class="col">
-            <ul>
+            <ul class="task-list">
                 {% for task in tasks %}
-                    <li>{{ task.description }}
+                    <li class="task-item">{{ task.description }}
                         <form method="POST" action="{{ url_for('delete', task_id=task.id) }}" style="display: inline;">
                             <input type="checkbox" name="completed" value="{{ task.id }}" {% if task.completed %}checked{% endif %}>
                             <input type="hidden" name="task_id" value="{{ task.id }}">
